@@ -17,7 +17,7 @@ interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   backdropFilter?: string;
 }
 
-const Icon: Component<IconProps> = (props) => {
+const Icon: Component<IconProps> = (props: IconProps) => {
   const [local, rest] = splitProps(props, ['src', 'color', 'hoverColor', 'scale', 'base', 'transform', 'filter', 'backdropFilter']);
   const px = (local.base ?? 16) * (local.scale ?? 1);
 
