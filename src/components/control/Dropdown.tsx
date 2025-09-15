@@ -111,10 +111,10 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     const onScroll = () => open() && adjustPosition();
     window.addEventListener('resize', onResize, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
-    onCleanup(() => {
+    return () => {
       window.removeEventListener('resize', onResize as any);
       window.removeEventListener('scroll', onScroll as any);
-    });
+    };
   });
 
   // open 変更時や dir 判定後に位置を更新

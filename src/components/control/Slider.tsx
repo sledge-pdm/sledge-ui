@@ -1,13 +1,28 @@
 import type { LabelMode } from '@sledge/core';
 import { type Component, createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js';
-import { handle, line, lineHitbox, slider, sliderRoot, valueLabel, valueLabelContainer, valueLabelInput } from '../../styles/control/slider.css';
+import {
+  handle,
+  handleVertical,
+  line,
+  lineHitbox,
+  lineHitboxVertical,
+  lineVertical,
+  slider,
+  sliderRoot,
+  sliderVertical,
+  valueLabel,
+  valueLabelContainer,
+  valueLabelInput,
+} from '../../styles/control/slider.css';
 
 interface SliderProps {
   min: number;
   max: number;
   defaultValue?: number;
   value?: number;
+  orientation?: 'horizontal' | 'vertical';
   wheelSpin?: boolean;
+  wheelStep?: number;
   allowFloat?: boolean;
   floatSignificantDigits?: number;
   labelMode: LabelMode;
@@ -65,9 +80,19 @@ const Slider: Component<SliderProps> = (props) => {
     if (!sliderRef || !isDrag()) {
       setDrag(false);
     } else {
-      const { left, width } = sliderRef.getBoundingClientRect();
-      let pos = Math.max(0, Math.min(e.clientX - left, width));
-      const raw = props.min + (pos / width) * (props.max - props.min);
+      const rect = sliderRef.getBoundingClientRect();
+      let raw: number;
+      if (props.orientation === 'vertical') {
+        const { top, height } = rect;
+        // 上を max, 下を min にする (一般的 UI)。逆にしたい場合は (1 - posRatio)
+        let pos = Math.max(0, Math.min(e.clientY - top, height));
+        const posRatio = 1 - pos / height; // 上=1 下=0
+        raw = props.min + posRatio * (props.max - props.min);
+      } else {
+        const { left, width } = rect;
+        let pos = Math.max(0, Math.min(e.clientX - left, width));
+        raw = props.min + (pos / width) * (props.max - props.min);
+      }
       update(getFixedValue(raw));
     }
   };
@@ -79,9 +104,18 @@ const Slider: Component<SliderProps> = (props) => {
   const onLineClick = (e: MouseEvent) => {
     const shouldStartDrag = onPointerDownOnValidArea(e);
     if (!sliderRef || !shouldStartDrag) return;
-    const { left, width } = sliderRef.getBoundingClientRect();
-    let pos = Math.max(0, Math.min(e.clientX - left, width));
-    const raw = props.min + (pos / width) * (props.max - props.min);
+    const rect = sliderRef.getBoundingClientRect();
+    let raw: number;
+    if (props.orientation === 'vertical') {
+      const { top, height } = rect;
+      let pos = Math.max(0, Math.min(e.clientY - top, height));
+      const posRatio = 1 - pos / height;
+      raw = props.min + posRatio * (props.max - props.min);
+    } else {
+      const { left, width } = rect;
+      let pos = Math.max(0, Math.min(e.clientX - left, width));
+      raw = props.min + (pos / width) * (props.max - props.min);
+    }
     update(getFixedValue(raw));
   };
 
@@ -115,7 +149,10 @@ const Slider: Component<SliderProps> = (props) => {
 
   const handleOnWheel = (e: WheelEvent) => {
     if (props.wheelSpin) {
-      const newValue = getFixedValue(value() + (e.deltaY < 0 ? 1 : -1));
+      const step = props.wheelStep ?? 1;
+      const delta = e.deltaY < 0 ? step : -step;
+      // 縦方向はホイールの方向と intuitive に一致: 上スクロール(negative deltaY) => 値増加
+      const newValue = getFixedValue(value() + delta);
       update(getFixedValue(newValue));
     }
   };
@@ -177,7 +214,7 @@ const Slider: Component<SliderProps> = (props) => {
       <Show when={props.labelMode === 'left'}>{labelArea}</Show>
 
       <div
-        class={slider}
+        class={props.orientation === 'vertical' ? sliderVertical : slider}
         ref={(el) => (sliderRef = el)}
         onPointerDown={handlePointerDown}
         onDblClick={() => {
@@ -185,10 +222,14 @@ const Slider: Component<SliderProps> = (props) => {
         }}
         onClick={onLineClick}
       >
-        <div class={lineHitbox} onWheel={handleOnWheel}>
-          <div class={line} />
+        <div class={props.orientation === 'vertical' ? lineHitboxVertical : lineHitbox} onWheel={handleOnWheel}>
+          <div class={props.orientation === 'vertical' ? lineVertical : line} />
         </div>
-        <div style={{ left: `${percent()}%` }} class={handle} />
+        {props.orientation === 'vertical' ? (
+          <div style={{ bottom: `${percent()}%` }} class={handleVertical} />
+        ) : (
+          <div style={{ left: `${percent()}%` }} class={handle} />
+        )}
       </div>
 
       <Show when={props.labelMode === 'right'}>{labelArea}</Show>

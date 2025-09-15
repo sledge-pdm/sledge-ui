@@ -1,5 +1,5 @@
 import { vars } from '@sledge/theme';
-import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, onMount } from 'solid-js';
 
 interface SparkLineProps {
   /** 横ピクセル数＝バッファ長 */
@@ -99,19 +99,12 @@ export const SparkLineLegacy: Component<SparkLineProps> = (props) => {
     };
     document.addEventListener('visibilitychange', onVis);
 
-    onCleanup(() => {
+    return () => {
       document.removeEventListener('visibilitychange', onVis);
       if (startTimer) clearTimeout(startTimer);
       if (iv) clearInterval(iv);
       if (rafId) cancelAnimationFrame(rafId);
-    });
-  });
-
-  // マウント解除時に止める
-  onCleanup(() => {
-    if (startTimer) clearTimeout(startTimer);
-    if (iv) clearInterval(iv);
-    if (rafId) cancelAnimationFrame(rafId);
+    };
   });
 
   return (

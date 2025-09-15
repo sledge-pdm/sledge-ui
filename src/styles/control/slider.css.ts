@@ -15,7 +15,7 @@ export const sliderRoot = style([
 export const valueLabelContainer = style([
   flexRow,
   {
-    minWidth: '52px',
+    minWidth: '42px',
   },
 ]);
 export const valueLabel = style({
@@ -36,6 +36,18 @@ export const slider = style({
   touchAction: 'none',
 });
 
+// vertical variant
+export const sliderVertical = style({
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  overflow: 'visible',
+  position: 'relative',
+  width: 'auto',
+  touchAction: 'none',
+});
+
 export const lineHitbox = style({
   alignItems: 'center',
   backgroundColor: 'transparent',
@@ -46,12 +58,31 @@ export const lineHitbox = style({
   width: '100%',
 });
 
+export const lineHitboxVertical = style({
+  alignItems: 'center',
+  backgroundColor: 'transparent',
+  cursor: 'pointer',
+  display: 'flex',
+  flexDirection: 'column',
+  width: '16px',
+  position: 'absolute',
+  height: '100%',
+});
+
 export const line = style({
   backgroundColor: vars.color.onBackground,
   display: 'flex',
   height: '1px',
   pointerEvents: 'none', // イベントは親に任せる
   width: '100%',
+});
+
+export const lineVertical = style({
+  backgroundColor: vars.color.onBackground,
+  display: 'flex',
+  width: '1px',
+  pointerEvents: 'none',
+  height: '100%',
 });
 
 export const handle = style({
@@ -62,4 +93,14 @@ export const handle = style({
   position: 'absolute',
   transform: 'translateX(-50%)',
   width: '2px',
+});
+
+export const handleVertical = style({
+  backgroundColor: vars.color.onBackground,
+  width: '8px',
+  bottom: '50%',
+  pointerEvents: 'none',
+  position: 'absolute',
+  transform: 'translateY(50%)',
+  height: '2px',
 });
