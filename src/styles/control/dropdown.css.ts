@@ -13,7 +13,7 @@ export const dropdownContainer = style({
 export const triggerButton = style([
   flexRow,
   {
-    backgroundColor: vars.color.background,
+    backgroundColor: vars.color.controls,
     border: `1px solid ${vars.color.border}`,
     padding: '5px 11px 5px 11px',
     width: 'fit-content',
@@ -50,7 +50,7 @@ export const menuStyle = style([
     position: 'absolute',
     top: '100%',
     zIndex: Consts.zIndex.dropdownMenu,
-    backgroundColor: vars.color.background,
+    backgroundColor: vars.color.controls,
     border: `1px solid ${vars.color.border}`,
     marginTop: '0px',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
