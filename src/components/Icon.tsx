@@ -1,5 +1,16 @@
+import { css } from '@acab/ecsstatic';
 import { type Component, type JSX, splitProps } from 'solid-js';
-import '../styles/icon.css';
+
+const iconClass = css`
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background-color: var(--icon-fill);
+  mask: var(--icon-url) center/contain no-repeat;
+  image-rendering: pixelated;
+  &:hover {
+    background-color: var(--icon-hover-fill);
+  }
+`;
 
 interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   /** 透明背景 + 白(255,255,255) で描いた αマスク PNG */
@@ -24,7 +35,7 @@ const Icon: Component<IconProps> = (props: IconProps) => {
   return (
     <div
       {...rest}
-      class='icon'
+      class={iconClass}
       style={{
         '--icon-size': `${px}px`,
         '--icon-fill': local.color ?? 'currentColor',

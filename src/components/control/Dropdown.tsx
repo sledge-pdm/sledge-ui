@@ -1,8 +1,99 @@
+import { css } from '@acab/ecsstatic';
 import { vars, ZFB08 } from '@sledge/theme';
 import { createEffect, createMemo, createSignal, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import { dropdownContainer, itemText, menuDirection, menuItem, menuStyle, triggerButton, triggerButtonNoBG } from '../../styles/control/dropdown.css';
 import Icon from '../Icon';
+
+// Recreate previous style tokens via CSS variables (vars -> CSS custom properties)
+const dropdownContainer = css`
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+`;
+
+const triggerButton = css`
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-controls);
+  border: 1px solid var(--color-border);
+  padding: 5px 11px 5px 11px;
+  width: fit-content;
+  text-align: left;
+  min-width: 100px;
+  max-width: 100%;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  &:hover {
+    transform: none;
+  }
+  &:hover {
+    background-color: var(--color-button-hover);
+  }
+  &:active {
+    background-color: var(--color-button-hover);
+  }
+`;
+
+const triggerButtonNoBG = css`
+  background: none !important;
+  background-color: none !important;
+  border: none !important;
+`;
+
+const menuStyle = css`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  z-index: var(--zindex-dropdown-menu);
+  background-color: var(--color-controls);
+  border: 1px solid var(--color-border);
+  margin-top: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  min-width: 100px;
+  overflow-y: auto;
+  width: fit-content;
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-on-background);
+  }
+`;
+
+const menuDirection = {
+  down: css`
+    top: 100%;
+    bottom: auto;
+    margin-top: 0px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  `,
+  up: css`
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 0px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  `,
+};
+
+const menuItem = css`
+  z-index: var(--zindex-dropdown-menu);
+  padding: 8px 10px 8px 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-surface);
+  }
+`;
+
+const itemText = css`
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-on-background);
+`;
 
 export type DropdownOption<T extends string | number> = {
   label: string;
@@ -149,7 +240,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     >
       <button
         type='button'
-        class={p.noBackground ? triggerButtonNoBG : triggerButton}
+        class={p.noBackground ? `${triggerButton} ${triggerButtonNoBG}` : triggerButton}
         style={{
           'box-sizing': 'border-box',
           overflow: 'hidden',

@@ -1,9 +1,40 @@
+import { css } from '@acab/ecsstatic';
 import { k12x8, vars } from '@sledge/theme';
 import { createEffect, createSignal, For, onCleanup, onMount, Show, type Component } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import { itemText, menuItem, menuStyle } from '../styles/menu_list.css';
 import Icon from './Icon';
 import type { MenuListOption } from './MenuList';
+
+const menuStyle = css`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  z-index: var(--zindex-dropdown-menu);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  max-height: 200px;
+  overflow-y: auto;
+`;
+
+const menuItem = css`
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 8px 10px 8px 10px;
+  overflow: hidden;
+  gap: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-surface);
+  }
+`;
+
+const itemText = css`
+  white-space: nowrap;
+  padding: 0;
+  inset: 0;
+`;
 
 type Coords = { x: number; y: number };
 

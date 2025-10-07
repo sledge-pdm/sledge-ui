@@ -1,6 +1,8 @@
 import { createSignal, type Component } from 'solid-js';
 import type { JSX } from 'solid-js/h/jsx-runtime';
 
+// Button styles are already handled by global.css, no additional styles needed
+
 interface ButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   key?: string | number;
   hoverContent?: string;

@@ -1,5 +1,20 @@
-import { vars } from '@sledge/theme';
+import { css } from '@acab/ecsstatic';
 import { type Component, createEffect, createSignal, onMount } from 'solid-js';
+
+const containerStyle = css`
+  position: relative;
+  background: #00000017;
+  border: 1px solid var(--color-border);
+  box-sizing: content-box;
+`;
+
+const canvasStyle = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  image-rendering: pixelated;
+  box-sizing: content-box;
+`;
 
 interface SparkLineProps {
   height: number;
@@ -71,25 +86,18 @@ export const SparkLine: Component<SparkLineProps> = (props) => {
   return (
     <div
       ref={(el) => (container = el)}
+      class={containerStyle}
       style={{
-        position: 'relative',
-        background: '#00000017',
-        border: `1px solid ${vars.color.border}`,
         width: `${props.length * lengthMult()}px`,
         height: `${props.height}px`,
-        'box-sizing': 'content-box',
       }}
     >
       <canvas
         ref={(el) => (canvas = el)}
+        class={canvasStyle}
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          'image-rendering': 'pixelated',
           width: `${props.length * lengthMult()}px`,
           height: `${props.height}px`,
-          'box-sizing': 'content-box',
         }}
       />
     </div>
