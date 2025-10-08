@@ -1,4 +1,5 @@
 import { css } from '@acab/ecsstatic';
+import { clsx } from '@sledge/core';
 import { vars, ZFB08 } from '@sledge/theme';
 import { createEffect, createMemo, createSignal, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
@@ -240,7 +241,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     >
       <button
         type='button'
-        class={p.noBackground ? `${triggerButton} ${triggerButtonNoBG}` : triggerButton}
+        class={clsx(triggerButton, p.noBackground && triggerButtonNoBG)}
         style={{
           'box-sizing': 'border-box',
           overflow: 'hidden',
@@ -264,7 +265,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
         <Portal>
           <ul
             ref={menuRef}
-            class={`${menuStyle} ${menuDirection[dir()]}`}
+            class={clsx(menuStyle, menuDirection[dir()])}
             role='listbox'
             style={{
               position: 'fixed',

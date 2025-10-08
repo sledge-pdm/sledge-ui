@@ -1,4 +1,5 @@
 import { css } from '@acab/ecsstatic';
+import { clsx } from '@sledge/core';
 import { type Component, Show } from 'solid-js';
 
 const svgStyle = css`
@@ -18,7 +19,7 @@ const Light: Component<LightProps> = (props: LightProps) => {
 
   return (
     <svg
-      class={`${svgStyle} ${props.class || ''}`}
+      class={clsx(svgStyle, props.class)}
       style={{
         width: `${width}px`,
         height: `${height}px`,

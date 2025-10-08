@@ -1,4 +1,5 @@
 import { css } from '@acab/ecsstatic';
+import { clsx } from '@sledge/core';
 import { vars } from '@sledge/theme';
 import { type Component, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
 
@@ -85,7 +86,7 @@ export const MenuList: Component<Props> = (props) => {
     <ul
       {...props}
       ref={containerRef}
-      class={`${menuStyle} ${menuDirection[dir]}`}
+      class={clsx(menuStyle, menuDirection[dir])}
       role='listbox'
       style={{
         ...(typeof props.style === 'object' ? props.style : {}),
