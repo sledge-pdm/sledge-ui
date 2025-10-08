@@ -1,5 +1,5 @@
 import { css } from '@acab/ecsstatic';
-import { k12x8, vars } from '@sledge/theme';
+import { color } from '@sledge/theme';
 import { createEffect, createSignal, For, onCleanup, onMount, Show, type Component } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import Icon from './Icon';
@@ -121,7 +121,7 @@ export const ContextMenuList: Component<Props> = (props) => {
             right: 'auto',
             'min-width': '120px',
             'margin-top': '4px',
-            'border-color': vars.color.onBackground,
+            'border-color': color.onBackground,
             'border-radius': '4px',
 
             filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2))',
@@ -129,7 +129,7 @@ export const ContextMenuList: Component<Props> = (props) => {
           onTransitionEnd={adjustPosition}
         >
           <Show when={props.title}>
-            <p style={{ margin: '6px 8px', color: vars.color.muted }}>{props.title}</p>
+            <p style={{ margin: '6px 8px', color: color.muted }}>{props.title}</p>
           </Show>
           <For each={props.options} fallback={<li>選択肢がありません</li>}>
             {(option, index) => (
@@ -139,7 +139,7 @@ export const ContextMenuList: Component<Props> = (props) => {
                 style={{
                   'pointer-events': option.disabled ? 'none' : 'all',
                   opacity: option.disabled ? 0.5 : 1,
-                  'border-bottom': index() !== props.options.length - 1 ? `1px solid ${vars.color.borderSecondary}` : 'none',
+                  'border-bottom': index() !== props.options.length - 1 ? `1px solid ${color.borderSecondary}` : 'none',
                 }}
                 onClick={() => {
                   option.onSelect?.();
@@ -148,9 +148,9 @@ export const ContextMenuList: Component<Props> = (props) => {
               >
                 {/* icon は 8x8 前提 */}
                 <Show when={option.icon} fallback={<div style={{ width: '8px', height: '8px' }} />}>
-                  <Icon src={option.icon!} base={8} color={vars.color.onBackground} />
+                  <Icon src={option.icon!} base={8} color={color.onBackground} />
                 </Show>
-                <p class={itemText} style={{ 'font-family': k12x8, 'font-size': '8px', 'padding-top': '1px', 'margin-bottom': '-1px' }}>
+                <p class={itemText} style={{ 'font-family': 'k12x8', 'font-size': '8px', 'padding-top': '1px', 'margin-bottom': '-1px' }}>
                   {option.label}
                 </p>
               </li>

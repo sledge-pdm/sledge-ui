@@ -1,6 +1,6 @@
 import { css } from '@acab/ecsstatic';
 import { clsx } from '@sledge/core';
-import { vars } from '@sledge/theme';
+import { color } from '@sledge/theme';
 import { type Component, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
 
 const menuStyle = css`
@@ -111,7 +111,7 @@ export const MenuList: Component<Props> = (props) => {
             <Show when={option.icon}>
               <img src={option.icon} alt={option.label} width='8' height='8' />
             </Show>
-            <p class={itemText} style={{ color: option.color ?? vars.color.onBackground }}>
+            <p class={itemText} style={{ color: option.color ?? color.onBackground }}>
               {option.label}
             </p>
           </li>

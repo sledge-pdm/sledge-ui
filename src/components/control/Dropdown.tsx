@@ -1,6 +1,6 @@
 import { css } from '@acab/ecsstatic';
 import { clsx } from '@sledge/core';
-import { vars, ZFB08 } from '@sledge/theme';
+import { color, fonts } from '@sledge/theme';
 import { createEffect, createMemo, createSignal, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import Icon from '../Icon';
@@ -254,11 +254,11 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
         aria-haspopup='listbox'
         aria-expanded={open()}
       >
-        <p class={itemText} style={{ 'font-family': p.fontFamily ?? ZFB08, width: p.fullWidth ? '100%' : undefined }}>
+        <p class={itemText} style={{ 'font-family': p.fontFamily ?? fonts.ZFB08, width: p.fullWidth ? '100%' : undefined }}>
           {noItem() ? '- no item -' : getAdjustedLabel(selectedLabel())}
         </p>
         <div>
-          <Icon src={'/icons/misc/dropdown_caret.png'} base={9} color={vars.color.onBackground} style={{ opacity: 0.75 }} />
+          <Icon src={'/icons/misc/dropdown_caret.png'} base={9} color={color.onBackground} style={{ opacity: 0.75 }} />
         </div>
       </button>
       <Show when={open()}>
@@ -279,7 +279,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
             <For each={p.options}>
               {(option) => (
                 <li class={menuItem} role='option' aria-selected={option.value === getValue()} onClick={() => select(option)}>
-                  <p class={itemText} style={{ 'font-family': p.fontFamily ?? ZFB08 }}>
+                  <p class={itemText} style={{ 'font-family': p.fontFamily ?? fonts.ZFB08 }}>
                     {getAdjustedLabel(option.label)}
                   </p>
                 </li>
