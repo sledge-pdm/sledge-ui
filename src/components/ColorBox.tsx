@@ -1,5 +1,6 @@
-import { vars } from '@sledge/theme';
 import { type Accessor, type Component } from 'solid-js';
+
+// ColorBox uses inline styles, no CSS classes needed
 
 interface ColorBoxProps {
   class?: string;
@@ -17,7 +18,7 @@ const ColorBox: Component<ColorBoxProps> = (props: ColorBoxProps) => {
   const isSelected = () => props.enableUsingSelection && props.currentColor?.() === props.color;
   const isWhiteOrNone = () => props.color === 'none' || props.color.toLowerCase() === '#ffffff';
 
-  const preferedBorder = () => (isWhiteOrNone() || isSelected() ? `1px solid ${vars.color.onBackground}` : `1px solid ${vars.color.border}`);
+  const preferedBorder = () => (isWhiteOrNone() || isSelected() ? `1px solid var(--color-on-background)` : `1px solid var(--color-border)`);
 
   const onColorClicked = (color: string) => {
     if (props.onClick) props.onClick(color);

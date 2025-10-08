@@ -1,5 +1,42 @@
+import { css } from '@acab/ecsstatic';
 import { type Component } from 'solid-js';
-import { customRadio, hiddenRadio, radioWrapper } from '../../styles/control/radio_button.css';
+
+const radioWrapper = css`
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+`;
+const hiddenRadio = css`
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+`;
+const customRadio = css`
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--color-button-border);
+  border-radius: 0px;
+  margin-left: 8px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.1s;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-enabled);
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+  input:checked + &::after {
+    opacity: 1;
+  }
+`;
 
 const RadioButton: Component<{
   id?: string;
@@ -17,9 +54,7 @@ const RadioButton: Component<{
         type='radio'
         name={props.name}
         checked={props.value}
-        onChange={(e) => {
-          if (props.onChange) props.onChange(e.target.checked);
-        }}
+        onChange={(e) => props.onChange?.(e.target.checked)}
       />
       <span class={customRadio}></span>
     </label>

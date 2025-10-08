@@ -1,19 +1,96 @@
+import { css } from '@acab/ecsstatic';
 import type { LabelMode } from '@sledge/core';
 import { type Component, createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js';
-import {
-  handle,
-  handleVertical,
-  line,
-  lineHitbox,
-  lineHitboxVertical,
-  lineVertical,
-  slider,
-  sliderRoot,
-  sliderVertical,
-  valueLabel,
-  valueLabelContainer,
-  valueLabelInput,
-} from '../../styles/control/slider.css';
+
+const sliderRoot = css`
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+`;
+const valueLabelContainer = css`
+  display: flex;
+  flex-direction: row;
+  min-width: 42px;
+`;
+const valueLabel = css`
+  width: 52px;
+`;
+const valueLabelInput = css`
+  width: 52px;
+  letter-spacing: 1px;
+`;
+const slider = css`
+  align-items: center;
+  display: flex;
+  height: auto;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+  touch-action: none;
+`;
+const sliderVertical = css`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: visible;
+  position: relative;
+  width: auto;
+  touch-action: none;
+`;
+const lineHitbox = css`
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  height: 16px;
+  position: absolute;
+  width: 100%;
+`;
+const lineHitboxVertical = css`
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  width: 16px;
+  position: absolute;
+  height: 100%;
+`;
+const line = css`
+  background-color: var(--color-on-background);
+  display: flex;
+  height: 1px;
+  pointer-events: none;
+  width: 100%;
+`;
+const lineVertical = css`
+  background-color: var(--color-on-background);
+  display: flex;
+  width: 1px;
+  pointer-events: none;
+  height: 100%;
+`;
+const handle = css`
+  background-color: var(--color-on-background);
+  height: 8px;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 2px;
+`;
+const handleVertical = css`
+  background-color: var(--color-on-background);
+  width: 8px;
+  bottom: 50%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(50%);
+  height: 2px;
+`;
 
 interface SliderProps {
   min: number;

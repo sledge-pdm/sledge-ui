@@ -1,6 +1,52 @@
+import { css } from '@acab/ecsstatic';
 import { vars } from '@sledge/theme';
 import { type Component, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
-import { itemText, menuDirection, menuItem, menuStyle } from '../styles/menu_list.css';
+
+const menuStyle = css`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  z-index: var(--zindex-dropdown-menu);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  max-height: 200px;
+  overflow-y: auto;
+`;
+
+const menuItem = css`
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 8px 10px 8px 10px;
+  overflow: hidden;
+  gap: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-surface);
+  }
+`;
+
+const itemText = css`
+  white-space: nowrap;
+  padding: 0;
+  inset: 0;
+`;
+
+const menuDirection = {
+  down: css`
+    top: 100%;
+    bottom: auto;
+    margin-top: 0px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  `,
+  up: css`
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 0px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  `,
+};
 
 export interface MenuListOption {
   icon?: string; // 8x8
