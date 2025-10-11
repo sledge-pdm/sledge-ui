@@ -236,7 +236,10 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
       {...p.props}
       onWheel={(e) => {
         if (noItem() || p.disabled) return;
-        if (p.wheelSpin === undefined || p.wheelSpin) spin(e.deltaY > 0);
+        if (p.wheelSpin === undefined || p.wheelSpin) {
+          e.preventDefault();
+          spin(e.deltaY > 0);
+        }
       }}
     >
       <button
