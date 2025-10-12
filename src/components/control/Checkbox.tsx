@@ -1,6 +1,6 @@
 import { css } from '@acab/ecsstatic';
-import type { LabelMode } from '@sledge/core';
 import { type Component, Show } from 'solid-js';
+import type { LabelMode } from '../../types';
 
 const checkBoxWrapper = css`
   display: inline-flex;

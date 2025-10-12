@@ -11,3 +11,4 @@ export { default as Icon } from './src/components/Icon';
 export { default as Light } from './src/components/Light';
 export { MenuList, type MenuListOption } from './src/components/MenuList';
 export { SparkLine } from './src/components/SparkLine';
+export { type LabelMode } from './src/types';
