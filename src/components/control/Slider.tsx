@@ -13,30 +13,37 @@ const valueLabelContainer = css`
   display: flex;
   flex-direction: row;
   min-width: 42px;
+  width: fit-content;
+  width: auto;
+  box-sizing: content-box;
+  overflow: hidden;
 `;
 const valueLabel = css`
-  width: 52px;
+  white-space: nowrap;
+  width: fit-content;
+  margin-right: 16px;
 `;
 const valueLabelInput = css`
-  width: 52px;
+  white-space: nowrap;
+  width: fit-content;
   letter-spacing: 1px;
 `;
 const slider = css`
+  position: relative;
   align-items: center;
   display: flex;
   height: auto;
   overflow: visible;
-  position: relative;
-  width: 100%;
+  flex-grow: 1;
   touch-action: none;
 `;
 const sliderVertical = css`
+  position: relative;
   align-items: center;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: visible;
-  position: relative;
   width: auto;
   touch-action: none;
 `;
