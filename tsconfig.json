@@ -1,10 +1,17 @@
 {
-  "extends": "../../configs/ts/tsconfig.base.json",
   "compilerOptions": {
     "verbatimModuleSyntax": true,
     "esModuleInterop": true,
     "jsxImportSource": "solid-js",
     "baseUrl": ".",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
     "paths": {
       "@sledge/core": ["../core"],
       "@sledge/core/*": ["../core/src/*"],
