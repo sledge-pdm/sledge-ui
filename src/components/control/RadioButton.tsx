@@ -43,10 +43,11 @@ const RadioButton: Component<{
   name?: string;
   label?: string;
   value?: boolean;
+  title?: string;
   onChange?: (checked: boolean) => void;
 }> = (props) => {
   return (
-    <label class={radioWrapper}>
+    <label class={radioWrapper} title={props.title}>
       {props.label}
       <input
         id={props.id}

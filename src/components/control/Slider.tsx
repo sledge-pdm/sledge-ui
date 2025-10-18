@@ -112,6 +112,7 @@ interface SliderProps {
   labelMode: LabelMode;
   customFormat?: string;
   allowDirectInput?: boolean;
+  title?: string;
   onChange?: (newValue: number) => void;
   onDoubleClick?: () => void;
   onPointerDownOnValidArea?: (e: PointerEvent | MouseEvent) => boolean;
@@ -255,7 +256,7 @@ const Slider: Component<SliderProps> = (props) => {
   });
 
   const labelArea = (
-    <div ref={(el) => (labelRef = el)} class={valueLabelContainer} onWheel={handleOnWheel}>
+    <div ref={(el) => (labelRef = el)} class={valueLabelContainer} onWheel={handleOnWheel} title={props.title}>
       <Show
         when={directInputMode()}
         fallback={

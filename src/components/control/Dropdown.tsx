@@ -112,6 +112,7 @@ interface Props<T extends string | number = string> {
   wheelSpin?: boolean;
   disabled?: boolean;
   fontFamily?: string;
+  title?: string;
 }
 
 const Dropdown = <T extends string | number>(p: Props<T>) => {
@@ -241,6 +242,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
           spin(e.deltaY > 0);
         }
       }}
+      title={p.title}
     >
       <button
         type='button'

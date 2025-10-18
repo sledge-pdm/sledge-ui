@@ -59,12 +59,13 @@ const Checkbox: Component<{
   label?: string;
   labelMode?: LabelMode;
   checked?: boolean;
+  title?: string;
   onChange?: (checked: boolean) => void;
   inputRef?: (el: HTMLInputElement) => void;
 }> = (props) => {
   const labelMode = props.labelMode ?? 'right';
   return (
-    <label class={checkBoxWrapper}>
+    <label class={checkBoxWrapper} title={props.title}>
       <Show when={labelMode === 'left'}>{props.label}</Show>
       <input
         id={props.id}

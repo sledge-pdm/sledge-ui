@@ -51,6 +51,7 @@ interface Props {
   checked: boolean;
   onChange?: (checked: boolean) => void;
   labelMode?: LabelMode;
+  title?: string;
   /** 任意でラベル等を配置する場合の slot */
   children?: any;
 }
@@ -60,7 +61,7 @@ const ToggleSwitch: Component<Props> = (p) => {
 
   return (
     /* label 全体でクリック可能に */
-    <label class={`${toggleWrapper} ${toggleState}`}>
+    <label class={`${toggleWrapper} ${toggleState}`} title={p.title}>
       <Show when={p.labelMode === 'left'}>{p.children}</Show>
       <input id={p.id} type='checkbox' name={p.name} checked={p.checked} onInput={(e) => p.onChange?.(e.currentTarget.checked)} class={toggleInput} />
       <span class={toggleTrack}>
