@@ -110,7 +110,7 @@ interface SliderProps {
   allowFloat?: boolean;
   floatSignificantDigits?: number;
   labelMode: LabelMode;
-  customFormat?: string;
+  customFormat?: (value: number) => string;
   allowDirectInput?: boolean;
   title?: string;
   onChange?: (newValue: number) => void;
@@ -131,11 +131,10 @@ const Slider: Component<SliderProps> = (props) => {
 
   const getFormattedValue = (value: number): string => {
     let formatted = `${value}`;
-    // format (like "[value]px" -> "1200px")
     if (props.customFormat !== undefined) {
-      formatted = props.customFormat.replaceAll('[value]', formatted);
+      formatted = props.customFormat(value);
     } else {
-      formatted = `${value}.`;
+      formatted = `${value}`;
     }
     return formatted;
   };
