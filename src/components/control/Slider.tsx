@@ -233,6 +233,9 @@ const Slider: Component<SliderProps> = (props) => {
   };
 
   const handleOnWheel = (e: WheelEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     if (props.wheelSpin) {
       const step = props.wheelStep ?? 1;
       const delta = e.deltaY < 0 ? step : -step;
