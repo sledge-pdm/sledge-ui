@@ -94,7 +94,7 @@ export const MenuList: Component<Props> = (props) => {
         right: props.align === 'right' ? '0px' : 'auto',
       }}
     >
-      <For each={props.options} fallback={<li>選択肢がありません</li>}>
+      <For each={props.options} fallback={<p>no items</p>}>
         {(option) => (
           <li
             class={menuItem}

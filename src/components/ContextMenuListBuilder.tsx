@@ -28,7 +28,9 @@ export function showContextMenu(
   options: MenuListOption[],
   position: PositionLike,
   opts?: ShowMenuOptions
-): ContextMenuController {
+): ContextMenuController | undefined {
+  if (options.length === 0) return;
+
   const host = document.createElement('div');
   host.style.position = 'fixed';
   host.style.inset = '0 0 0 0';

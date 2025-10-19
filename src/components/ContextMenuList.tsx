@@ -131,7 +131,7 @@ export const ContextMenuList: Component<Props> = (props) => {
           <Show when={props.title}>
             <p style={{ margin: '6px 8px', color: color.muted }}>{props.title}</p>
           </Show>
-          <For each={props.options} fallback={<li>選択肢がありません</li>}>
+          <For each={props.options} fallback={<p>no items.</p>}>
             {(option, index) => (
               <li
                 class={menuItem}
