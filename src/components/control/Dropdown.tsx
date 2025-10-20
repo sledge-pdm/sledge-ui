@@ -248,6 +248,9 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
         type='button'
         class={clsx(triggerButton, p.noBackground && triggerButtonNoBG)}
         style={{
+          display: 'flex',
+          'flex-direction': 'row',
+          'align-items': 'center',
           'box-sizing': 'border-box',
           overflow: 'hidden',
           opacity: p.disabled || noItem() ? 0.5 : 1,
@@ -263,7 +266,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
           {noItem() ? '- no item -' : getAdjustedLabel(selectedLabel())}
         </p>
         <div>
-          <Icon src={'/icons/misc/dropdown_caret.png'} base={9} color={color.onBackground} style={{ opacity: 0.75 }} />
+          <Icon src={'/icons/misc/triangle_7.png'} base={7} color={color.onBackground} style={{ opacity: 0.75 }} />
         </div>
       </button>
       <Show when={open()}>
