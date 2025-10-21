@@ -13,7 +13,6 @@ const valueLabelContainer = css`
   display: flex;
   flex-direction: row;
   min-width: 42px;
-  width: fit-content;
   width: auto;
   box-sizing: content-box;
   overflow: hidden;
@@ -110,6 +109,7 @@ interface SliderProps {
   allowFloat?: boolean;
   floatSignificantDigits?: number;
   labelMode: LabelMode;
+  labelWidth?: number;
   customFormat?: (value: number) => string;
   allowDirectInput?: boolean;
   title?: string;
@@ -258,7 +258,15 @@ const Slider: Component<SliderProps> = (props) => {
   });
 
   const labelArea = (
-    <div ref={(el) => (labelRef = el)} class={valueLabelContainer} onWheel={handleOnWheel} title={props.title}>
+    <div
+      ref={(el) => (labelRef = el)}
+      class={valueLabelContainer}
+      onWheel={handleOnWheel}
+      title={props.title}
+      style={{
+        width: props.labelWidth ? `${props.labelWidth}px` : undefined,
+      }}
+    >
       <Show
         when={directInputMode()}
         fallback={
