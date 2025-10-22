@@ -27,6 +27,21 @@ const menuItem = css`
     background-color: var(--color-surface);
   }
 `;
+const menuLabel = css`
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 6px 10px 6px 10px;
+  overflow: hidden;
+  gap: 12px;
+  opacity: 0.8;
+`;
+
+const divider = css`
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 2px 4px;
+`;
 
 const itemText = css`
   white-space: nowrap;
@@ -50,10 +65,13 @@ const menuDirection = {
 };
 
 export interface MenuListOption {
+  type: 'item' | 'label' | 'divider';
   icon?: string; // 8x8
+  title?: string;
   label: string;
   disabled?: boolean;
   color?: string;
+  fontFamily?: string;
   onSelect?: () => void;
 }
 
@@ -95,27 +113,57 @@ export const MenuList: Component<Props> = (props) => {
       }}
     >
       <For each={props.options} fallback={<p>no items</p>}>
-        {(option) => (
-          <li
-            class={menuItem}
-            role='option'
-            style={{
-              'pointer-events': option.disabled ? 'none' : 'all',
-              opacity: option.disabled ? 0.5 : 1,
-            }}
-            onClick={() => {
-              option.onSelect?.();
-              props.onClose?.();
-            }}
-          >
-            <Show when={option.icon}>
-              <img src={option.icon} alt={option.label} width='8' height='8' />
-            </Show>
-            <p class={itemText} style={{ color: option.color ?? color.onBackground }}>
-              {option.label}
-            </p>
-          </li>
-        )}
+        {(option) => {
+          if (option.type === 'item') {
+            return (
+              <li
+                class={menuItem}
+                role='option'
+                title={option.title}
+                style={{
+                  'pointer-events': option.disabled ? 'none' : 'all',
+                  opacity: option.disabled ? 0.5 : 1,
+                }}
+                onClick={() => {
+                  option.onSelect?.();
+                  props.onClose?.();
+                }}
+              >
+                <Show when={option.icon}>
+                  <img src={option.icon} alt={option.label} width='8' height='8' />
+                </Show>
+                <p
+                  class={itemText}
+                  style={{
+                    'font-family': option.fontFamily,
+                    color: option.color ?? color.onBackground,
+                  }}
+                >
+                  {option.label}
+                </p>
+              </li>
+            );
+          } else if (option.type === 'label') {
+            return (
+              <li class={menuLabel} role='option' title={option.title}>
+                <Show when={option.icon}>
+                  <img src={option.icon} alt={option.label} width='8' height='8' />
+                </Show>
+                <p
+                  class={itemText}
+                  style={{
+                    'font-family': option.fontFamily,
+                    color: option.color ?? color.onBackground,
+                  }}
+                >
+                  {option.label}
+                </p>
+              </li>
+            );
+          } else {
+            return <div class={divider} />;
+          }
+        }}
       </For>
     </ul>
   );
