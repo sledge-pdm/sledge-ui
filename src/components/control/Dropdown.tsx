@@ -39,7 +39,7 @@ const triggerButton = css`
 const triggerButtonNoBG = css`
   background: none !important;
   background-color: none !important;
-  border: none !important;
+  border: 1px solid transparent;
 `;
 
 const menuStyle = css`
@@ -193,7 +193,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     // 横位置
     let x = p.align === 'left' ? trigger.left : trigger.right - w;
     // 縦位置（dir に応じる）
-    let y = dir() === 'down' ? trigger.bottom : trigger.top - h;
+    let y = dir() === 'down' ? trigger.bottom : trigger.top - h - 2;
 
     const clamped = clampToViewport(x, y, w, h);
     setCoords(clamped);
