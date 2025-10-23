@@ -12,6 +12,7 @@ const menuStyle = css`
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
   max-height: 200px;
+  min-width: 100%;
   overflow-y: auto;
 `;
 
@@ -44,9 +45,8 @@ const divider = css`
 `;
 
 const itemText = css`
-  white-space: nowrap;
-  padding: 0;
-  inset: 0;
+  white-space: normal;
+  min-width: 100%;
 `;
 
 const menuDirection = {
@@ -92,12 +92,19 @@ export const MenuList: Component<Props> = (props) => {
       props.onClose?.();
     }
   };
+  const handleScrollOutside = (e: WheelEvent) => {
+    if (containerRef && !containerRef.contains(e.currentTarget as Node)) {
+      props.onClose?.();
+    }
+  };
 
   onMount(() => {
     document.addEventListener('click', handleClickOutside);
+    document.addEventListener('wheel', handleScrollOutside);
   });
   onCleanup(() => {
     document.removeEventListener('click', handleClickOutside);
+    document.removeEventListener('wheel', handleScrollOutside);
   });
 
   return (
@@ -110,6 +117,9 @@ export const MenuList: Component<Props> = (props) => {
         ...(typeof props.style === 'object' ? props.style : {}),
         left: props.align === 'right' ? 'auto' : '0px',
         right: props.align === 'right' ? '0px' : 'auto',
+      }}
+      onWheel={(e) => {
+        e.stopImmediatePropagation();
       }}
     >
       <For each={props.options} fallback={<p>no items</p>}>

@@ -149,12 +149,19 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
       setOpen(false);
     }
   };
+  const handleScrollOutside = (e: WheelEvent) => {
+    if (containerRef && !containerRef.contains(e.currentTarget as Node)) {
+      setOpen(false);
+    }
+  };
 
   onMount(() => {
     document.addEventListener('click', handleClickOutside);
+    document.addEventListener('wheel', handleScrollOutside);
   });
   onCleanup(() => {
     document.removeEventListener('click', handleClickOutside);
+    document.removeEventListener('wheel', handleScrollOutside);
   });
 
   // メニューを開く直前に上下どちらに出すか判定
@@ -236,9 +243,11 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
       ref={containerRef}
       {...p.props}
       onWheel={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         if (noItem() || p.disabled) return;
         if (p.wheelSpin === undefined || p.wheelSpin) {
-          e.preventDefault();
           spin(e.deltaY > 0);
         }
       }}
@@ -281,6 +290,9 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
               left: `${coords().x}px`,
               bottom: 'auto',
               right: 'auto',
+            }}
+            onWheel={(e) => {
+              e.stopImmediatePropagation();
             }}
             onTransitionEnd={adjustPosition}
           >
