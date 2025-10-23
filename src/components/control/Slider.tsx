@@ -12,7 +12,6 @@ const sliderRoot = css`
 const valueLabelContainer = css`
   display: flex;
   flex-direction: row;
-  min-width: 42px;
   width: auto;
   box-sizing: content-box;
   overflow: hidden;
@@ -265,6 +264,7 @@ const Slider: Component<SliderProps> = (props) => {
       title={props.title}
       style={{
         width: props.labelWidth ? `${props.labelWidth}px` : undefined,
+        'min-width': props.labelWidth ? undefined : '42px',
       }}
     >
       <Show

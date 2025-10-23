@@ -20,6 +20,7 @@ const cursor = css`
   padding: 0;
   backdrop-filter: invert();
   filter: grayscale() contrast(20) contrast(20);
+  pointer-events: none;
 `;
 const disabledBorder = css`
   position: absolute;
@@ -31,6 +32,7 @@ const disabledBorder = css`
   transform-origin: 50% 50%;
   transform: translateY(-50%) rotate(45deg);
   backdrop-filter: invert(50%);
+  pointer-events: none;
 `;
 
 interface ColorBoxProps {
