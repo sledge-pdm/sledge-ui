@@ -71,6 +71,7 @@ export const SparkLine: Component<SparkLineProps> = (props) => {
     // 20%
     const paddingTop = Math.round(props.height * 0.2);
 
+    let lastY = -1;
     for (let x = 0; x < values().length; x++) {
       const v = values()[x];
       if (v === undefined) continue;
@@ -80,6 +81,15 @@ export const SparkLine: Component<SparkLineProps> = (props) => {
       // 底辺を y=height-1 として上向きに描画
       const y = props.height - 1 - q;
       ctx.fillRect(x * lengthMult(), y, lengthMult(), 1);
+
+      // differential fall
+      if (lastY !== -1) {
+        // now - prev
+        const fallAmount = y - lastY;
+        ctx.fillRect(x * lengthMult(), lastY, 1, fallAmount);
+      }
+
+      lastY = y;
     }
   };
 
