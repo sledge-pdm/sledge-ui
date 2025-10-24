@@ -32,7 +32,7 @@ const menuLabel = css`
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
-  padding: 6px 10px 6px 10px;
+  padding: 6px 10px 2px 10px;
   overflow: hidden;
   gap: 12px;
   opacity: 0.8;
@@ -41,7 +41,7 @@ const menuLabel = css`
 const divider = css`
   height: 1px;
   background-color: var(--color-border);
-  margin: 2px 4px;
+  margin: 1px 4px;
 `;
 
 const itemText = css`
