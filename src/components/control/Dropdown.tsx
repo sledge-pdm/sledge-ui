@@ -16,7 +16,6 @@ const triggerButton = css`
   display: flex;
   flex-direction: row;
   background-color: var(--color-controls);
-  border: 1px solid var(--color-border);
   padding: 5px 11px 5px 11px;
   width: fit-content;
   text-align: left;
@@ -39,7 +38,17 @@ const triggerButton = css`
 const triggerButtonNoBG = css`
   background: none !important;
   background-color: none !important;
-  border: 1px solid transparent;
+  border: 1px solid transparent !important;
+`;
+
+const triggerButtonSimple = css`
+  border: 1px solid var(--color-border);
+  border-radius: 1px;
+`;
+
+const triggerButtonEmphasis = css`
+  border: 1px solid var(--color-on-background-secondary);
+  border-radius: 4px;
 `;
 
 const menuStyle = css`
@@ -49,9 +58,7 @@ const menuStyle = css`
   top: 100%;
   z-index: var(--zindex-dropdown-menu);
   background-color: var(--color-controls);
-  border: 1px solid var(--color-border);
   margin-top: 0px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-height: 200px;
   min-width: 100px;
   overflow-y: auto;
@@ -64,18 +71,28 @@ const menuStyle = css`
   }
 `;
 
+const menuStyleSimple = css`
+  border: 1px solid var(--color-border);
+  border-radius: 1px;
+`;
+
+const menuStyleEmphasis = css`
+  border: 1px solid var(--color-on-background);
+  border-radius: 4px;
+`;
+
 const menuDirection = {
   down: css`
     top: 100%;
     bottom: auto;
     margin-top: 0px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   `,
   up: css`
     top: auto;
     bottom: 100%;
     margin-bottom: 0px;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
   `,
 };
 
@@ -113,10 +130,12 @@ interface Props<T extends string | number = string> {
   disabled?: boolean;
   fontFamily?: string;
   title?: string;
+  appearance?: 'simple' | 'emphasis';
 }
 
 const Dropdown = <T extends string | number>(p: Props<T>) => {
   p.align = p.align ?? 'left';
+  p.appearance = p.appearance ?? 'emphasis';
 
   let containerRef: HTMLDivElement | undefined;
   let menuRef: HTMLUListElement | undefined;
@@ -237,6 +256,9 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     p.onChange?.(next);
   };
 
+  const triggerButtonAdd = p.appearance === 'simple' ? triggerButtonSimple : triggerButtonEmphasis;
+  const menuStyleAdd = p.appearance === 'simple' ? menuStyleSimple : menuStyleEmphasis;
+
   return (
     <div
       class={dropdownContainer}
@@ -255,7 +277,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     >
       <button
         type='button'
-        class={clsx(triggerButton, p.noBackground && triggerButtonNoBG)}
+        class={clsx(triggerButton, triggerButtonAdd, p.noBackground && triggerButtonNoBG)}
         style={{
           display: 'flex',
           'flex-direction': 'row',
@@ -275,14 +297,14 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
           {noItem() ? '- no item -' : getAdjustedLabel(selectedLabel())}
         </p>
         <div>
-          <Icon src={'/icons/misc/triangle_7.png'} base={7} color={color.onBackground} style={{ opacity: 0.75 }} />
+          <Icon src={'/icons/misc/triangle_5.png'} base={5} color={color.onBackground} />
         </div>
       </button>
       <Show when={open()}>
         <Portal>
           <ul
             ref={menuRef}
-            class={clsx(menuStyle, menuDirection[dir()])}
+            class={clsx(menuStyle, menuDirection[dir()], menuStyleAdd)}
             role='listbox'
             style={{
               position: 'fixed',
