@@ -41,7 +41,7 @@ const menuLabel = css`
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
-  padding: 6px 10px 2px 10px;
+  padding: 6px 8px 6px 8px;
   overflow: hidden;
   gap: 12px;
   opacity: 0.8;
