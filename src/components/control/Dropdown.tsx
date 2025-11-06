@@ -1,9 +1,10 @@
 import { css } from '@acab/ecsstatic';
 import { clsx } from '@sledge/core';
 import { color, fonts } from '@sledge/theme';
-import { createEffect, createMemo, createSignal, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
+import { createEffect, createMemo, createSignal, type JSX, onCleanup, onMount, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import Icon from '../Icon';
+import { MenuList, type MenuListAppearance, type MenuListOption } from '../MenuList';
 
 // Recreate previous style tokens via CSS variables (vars -> CSS custom properties)
 const dropdownContainer = css`
@@ -51,36 +52,6 @@ const triggerButtonEmphasis = css`
   border-radius: 4px;
 `;
 
-const menuStyle = css`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 100%;
-  z-index: var(--zindex-dropdown-menu);
-  background-color: var(--color-controls);
-  margin-top: 0px;
-  max-height: 200px;
-  min-width: 100px;
-  overflow-y: auto;
-  width: fit-content;
-  &::-webkit-scrollbar {
-    width: 1px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--color-on-background);
-  }
-`;
-
-const menuStyleSimple = css`
-  border: 1px solid var(--color-border);
-  border-radius: 1px;
-`;
-
-const menuStyleEmphasis = css`
-  border: 1px solid var(--color-on-background);
-  border-radius: 4px;
-`;
-
 const menuDirection = {
   down: css`
     top: 100%;
@@ -96,15 +67,6 @@ const menuDirection = {
   `,
 };
 
-const menuItem = css`
-  z-index: var(--zindex-dropdown-menu);
-  padding: 8px 10px 8px 10px;
-  cursor: pointer;
-  &:hover {
-    background-color: var(--color-surface);
-  }
-`;
-
 const itemText = css`
   width: 100%;
   overflow: hidden;
@@ -113,24 +75,34 @@ const itemText = css`
   color: var(--color-on-background);
 `;
 
+const menuStyle = css`
+  position: fixed;
+  margin-top: 4px;
+  margin-left: 4px;
+  min-width: 100%;
+  z-index: var(--zindex-dropdown-menu);
+`;
+
 export type DropdownOption<T extends string | number> = {
   label: string;
   value: T;
 };
 
 interface Props<T extends string | number = string> {
+  ref?: (ref: HTMLElement) => void;
   value: T | (() => T);
   onChange?: (value: T) => void;
   options: DropdownOption<T>[];
   fullWidth?: boolean;
   align?: 'left' | 'right';
   props?: JSX.HTMLAttributes<HTMLDivElement>;
+  buttonProps?: JSX.HTMLAttributes<HTMLButtonElement>;
   noBackground?: boolean;
   wheelSpin?: boolean;
   disabled?: boolean;
   fontFamily?: string;
   title?: string;
-  appearance?: 'simple' | 'emphasis';
+  appearance?: MenuListAppearance;
 }
 
 const Dropdown = <T extends string | number>(p: Props<T>) => {
@@ -213,7 +185,8 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     if (!containerRef || !menuRef) return;
     const trigger = containerRef.getBoundingClientRect();
     const menuRect = menuRef.getBoundingClientRect();
-    const w = menuRect.width || 160; // fallback
+    // Fallback to 160 if menuRect.width is 0, as menuRef may not be rendered yet
+    const w = menuRect.width || 160;
     const h = Math.min(menuRef.scrollHeight, 200) || 160;
 
     // 横位置
@@ -227,12 +200,9 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
 
   onMount(() => {
     const onResize = () => open() && adjustPosition();
-    const onScroll = () => open() && adjustPosition();
     window.addEventListener('resize', onResize, { passive: true });
-    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       window.removeEventListener('resize', onResize as any);
-      window.removeEventListener('scroll', onScroll as any);
     };
   });
 
@@ -247,6 +217,17 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
   });
 
   const noItem = createMemo<boolean>(() => p.options.length === 0);
+  const menuListOptions = createMemo<MenuListOption[]>(() =>
+    p.options.map((option) => {
+      return {
+        ...option,
+        type: 'item',
+        onSelect: () => {
+          select(option);
+        },
+      } as MenuListOption;
+    })
+  );
 
   const spin = (isUp: boolean) => {
     const currentIndex = p.options.findIndex((option) => option.value === getValue());
@@ -257,12 +238,14 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
   };
 
   const triggerButtonAdd = p.appearance === 'simple' ? triggerButtonSimple : triggerButtonEmphasis;
-  const menuStyleAdd = p.appearance === 'simple' ? menuStyleSimple : menuStyleEmphasis;
 
   return (
     <div
       class={dropdownContainer}
-      ref={containerRef}
+      ref={(ref) => {
+        containerRef = ref;
+        p.ref?.(ref);
+      }}
       {...p.props}
       onWheel={(e) => {
         e.preventDefault();
@@ -292,6 +275,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
         onClick={toggle}
         aria-haspopup='listbox'
         aria-expanded={open()}
+        {...p.buttonProps}
       >
         <p class={itemText} style={{ 'font-family': p.fontFamily ?? fonts.ZFB08, width: p.fullWidth ? '100%' : undefined }}>
           {noItem() ? '- no item -' : getAdjustedLabel(selectedLabel())}
@@ -302,32 +286,23 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
       </button>
       <Show when={open()}>
         <Portal>
-          <ul
+          <MenuList
+            appearance={p.appearance}
             ref={menuRef}
-            class={clsx(menuStyle, menuDirection[dir()], menuStyleAdd)}
-            role='listbox'
-            style={{
-              position: 'fixed',
-              top: `${coords().y}px`,
-              left: `${coords().x}px`,
-              bottom: 'auto',
-              right: 'auto',
-            }}
+            class={clsx(menuStyle, menuDirection[dir()])}
+            options={menuListOptions()}
             onWheel={(e) => {
               e.stopImmediatePropagation();
             }}
+            onClose={() => {
+              setOpen(false);
+            }}
+            style={{
+              top: `${coords().y}px`,
+              left: `${coords().x}px`,
+            }}
             onTransitionEnd={adjustPosition}
-          >
-            <For each={p.options}>
-              {(option) => (
-                <li class={menuItem} role='option' aria-selected={option.value === getValue()} onClick={() => select(option)}>
-                  <p class={itemText} style={{ 'font-family': p.fontFamily ?? fonts.ZFB08 }}>
-                    {getAdjustedLabel(option.label)}
-                  </p>
-                </li>
-              )}
-            </For>
-          </ul>
+          />
         </Portal>
       </Show>
     </div>

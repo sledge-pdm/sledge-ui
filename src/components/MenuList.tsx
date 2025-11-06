@@ -2,6 +2,7 @@ import { css } from '@acab/ecsstatic';
 import { clsx } from '@sledge/core';
 import { color } from '@sledge/theme';
 import { type Component, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
+import Icon from './Icon';
 
 const menuStyle = css`
   display: flex;
@@ -85,17 +86,18 @@ export interface MenuListOption {
   onSelect?: () => void;
 }
 
+export type MenuListAppearance = 'simple' | 'emphasis';
+
 interface Props extends Omit<JSX.HTMLAttributes<HTMLUListElement>, 'onClick'> {
+  appearance?: MenuListAppearance;
   options: MenuListOption[];
   align?: 'left' | 'right'; // メニューの配置
   menuDir?: 'down' | 'up';
-  appearance?: 'simple' | 'emphasis';
   closeByOutsideClick?: boolean; // メニュー外クリックで閉じるかどうか
   onClose?: () => void; // メニューが閉じるときのコールバック
 }
 
 export const MenuList: Component<Props> = (props) => {
-  props.appearance = props.appearance ?? 'emphasis';
   let containerRef: HTMLUListElement | undefined;
   const dir = props.menuDir ?? 'down';
 
@@ -109,28 +111,38 @@ export const MenuList: Component<Props> = (props) => {
       props.onClose?.();
     }
   };
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') props.onClose?.();
+  };
 
   onMount(() => {
-    document.addEventListener('click', handleClickOutside);
-    document.addEventListener('wheel', handleScrollOutside);
+    document.addEventListener('keydown', handleKeydown);
+    if (props.closeByOutsideClick !== false) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('wheel', handleScrollOutside);
+    }
   });
   onCleanup(() => {
-    document.removeEventListener('click', handleClickOutside);
-    document.removeEventListener('wheel', handleScrollOutside);
+    document.removeEventListener('keydown', handleKeydown);
+    if (props.closeByOutsideClick !== false) {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('wheel', handleScrollOutside);
+    }
   });
 
-  const menuStyleAdd = props.appearance === 'simple' ? menuStyleSimple : menuStyleEmphasis;
+  const appearance = props.appearance ?? 'emphasis';
+  const menuStyleAdd = appearance === 'simple' ? menuStyleSimple : menuStyleEmphasis;
 
   return (
     <ul
       {...props}
       ref={containerRef}
-      class={clsx(menuStyle, menuStyleAdd, menuDirection[dir])}
+      class={clsx(menuStyle, menuDirection[dir], menuStyleAdd)}
       role='listbox'
       style={{
-        ...(typeof props.style === 'object' ? props.style : {}),
         left: props.align === 'right' ? 'auto' : '0px',
         right: props.align === 'right' ? '0px' : 'auto',
+        ...(typeof props.style === 'object' ? props.style : {}),
       }}
       onWheel={(e) => {
         e.stopImmediatePropagation();
@@ -154,7 +166,9 @@ export const MenuList: Component<Props> = (props) => {
                 }}
               >
                 <Show when={option.icon}>
-                  <img src={option.icon} alt={option.label} width='8' height='8' />
+                  <div>
+                    <Icon src={option.icon!} base={8} color={option.color ?? color.onBackground} />
+                  </div>
                 </Show>
                 <p
                   class={itemText}
@@ -171,7 +185,9 @@ export const MenuList: Component<Props> = (props) => {
             return (
               <li class={menuLabel} role='option' title={option.title}>
                 <Show when={option.icon}>
-                  <img src={option.icon} alt={option.label} width='8' height='8' />
+                  <div>
+                    <Icon src={option.icon!} base={8} color={option.color ?? color.onBackground} />
+                  </div>
                 </Show>
                 <p
                   class={itemText}

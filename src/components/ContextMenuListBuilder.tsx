@@ -15,7 +15,6 @@ function toCoords(pos: PositionLike): ContextMenuCoords {
 }
 
 export interface ShowMenuOptions {
-  closeByOutsideClick?: boolean;
   onClose?: () => void;
 }
 
@@ -23,12 +22,7 @@ export interface ContextMenuController {
   close: () => void;
 }
 
-export function showContextMenu(
-  title: string | undefined,
-  options: MenuListOption[],
-  position: PositionLike,
-  opts?: ShowMenuOptions
-): ContextMenuController | undefined {
+export function showContextMenu(options: MenuListOption[], position: PositionLike, opts?: ShowMenuOptions): ContextMenuController | undefined {
   if (options.length === 0) return;
 
   const host = document.createElement('div');
@@ -38,17 +32,14 @@ export function showContextMenu(
   document.body.appendChild(host);
 
   const pos = toCoords(position);
-  const closeByOutsideClick = opts?.closeByOutsideClick ?? true;
 
   let disposed = false;
   const dispose = render(
     () => (
       <ContextMenuList
-        title={title}
+        appearance='emphasis'
         options={options}
-        open={true}
         position={pos}
-        closeByOutsideClick={closeByOutsideClick}
         onClose={() => {
           if (disposed) return;
           disposed = true;
