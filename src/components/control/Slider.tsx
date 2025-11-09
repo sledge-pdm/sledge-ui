@@ -12,7 +12,6 @@ const sliderRoot = css`
 const valueLabelContainer = css`
   display: flex;
   flex-direction: row;
-  width: auto;
   box-sizing: content-box;
   overflow: hidden;
 `;
@@ -142,6 +141,7 @@ const Slider: Component<SliderProps> = (props) => {
   const percent = () => ((value() - props.min) / (props.max - props.min)) * 100;
 
   const update = (newValue: number) => {
+    newValue = getFixedValue(newValue);
     setValue(newValue);
     props.onChange?.(newValue);
   };
@@ -176,7 +176,7 @@ const Slider: Component<SliderProps> = (props) => {
         let pos = Math.max(0, Math.min(e.clientX - left, width));
         raw = props.min + (pos / width) * (props.max - props.min);
       }
-      update(getFixedValue(raw));
+      update(raw);
     }
   };
 
@@ -199,7 +199,7 @@ const Slider: Component<SliderProps> = (props) => {
       let pos = Math.max(0, Math.min(e.clientX - left, width));
       raw = props.min + (pos / width) * (props.max - props.min);
     }
-    update(getFixedValue(raw));
+    update(raw);
   };
 
   const getFixedValue = (raw: number): number => {
@@ -238,8 +238,8 @@ const Slider: Component<SliderProps> = (props) => {
       const step = props.wheelStep ?? 1;
       const delta = e.deltaY < 0 ? step : -step;
       // 縦方向はホイールの方向と intuitive に一致: 上スクロール(negative deltaY) => 値増加
-      const newValue = getFixedValue(value() + delta);
-      update(getFixedValue(newValue));
+      const newValue = value() + delta;
+      update(newValue);
     }
   };
 

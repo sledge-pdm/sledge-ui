@@ -61,6 +61,7 @@ export const ContextMenuList: Component<Props> = (props) => {
         style={{
           top: `${coords().y}px`,
           left: `${coords().x}px`,
+          'min-width': '120px',
         }}
         onTransitionEnd={adjustPosition}
       />
