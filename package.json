@@ -8,7 +8,8 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "solid-js": "^1.9.10"
+    "solid-js": "^1.9.10",
+    "@sledge/anvil": "workspace:*"
   },
   "devDependencies": {
     "@acab/ecsstatic": "^0.9.0"
