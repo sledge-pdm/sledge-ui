@@ -22,10 +22,10 @@ export type PathValue<T, P extends readonly any[]> = P extends [infer K, ...infe
 type JoinPath<P extends readonly any[], Sep extends string = '/'> = P extends []
   ? never
   : P extends [infer H]
-  ? H & string
-  : P extends [infer H, ...infer R]
-  ? `${H & string}${Sep}${JoinPath<Extract<R, readonly any[]>, Sep>}`
-  : never;
+    ? H & string
+    : P extends [infer H, ...infer R]
+      ? `${H & string}${Sep}${JoinPath<Extract<R, readonly any[]>, Sep>}`
+      : never;
 
 export type PathString<T> = JoinPath<Path<T>>;
 
@@ -128,7 +128,7 @@ export type ComponentPropsMap = {
 // Typed field constrained by a config shape and component to enforce correct paths/props.
 export type ConfigFieldOf<
   TConfig,
-  C extends ConfigComponentName | ConfigComponentFactory<any, ConfigFieldBase> = ConfigComponentName | ConfigComponentFactory<any, ConfigFieldBase>
+  C extends ConfigComponentName | ConfigComponentFactory<any, ConfigFieldBase> = ConfigComponentName | ConfigComponentFactory<any, ConfigFieldBase>,
 > = ConfigFieldBase & {
   component: C;
   path: Path<TConfig> | PathString<TConfig>;
