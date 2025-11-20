@@ -12,3 +12,7 @@ export { default as Light } from './src/components/Light';
 export { MenuList, type MenuListOption } from './src/components/MenuList';
 export { SparkLine } from './src/components/SparkLine';
 export { type LabelMode } from './src/types';
+export * from './src/config/components';
+export * from './src/config/types';
+export * from './src/config/path';
+export { ConfigFieldRenderer } from './src/config/renderer';
