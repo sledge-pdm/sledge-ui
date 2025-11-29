@@ -1,5 +1,5 @@
 import { css } from '@acab/ecsstatic';
-import { type Component, createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js';
+import { type Component, createEffect, createMemo, createSignal, onCleanup, onMount, Show } from 'solid-js';
 import type { LabelMode } from '../../types';
 
 const sliderRoot = css`
@@ -101,6 +101,7 @@ interface SliderProps {
   max: number;
   defaultValue?: number;
   value?: number;
+  dblClickResetValue?: number;
   orientation?: 'horizontal' | 'vertical';
   wheelSpin?: boolean;
   wheelStep?: number;
@@ -219,6 +220,12 @@ const Slider: Component<SliderProps> = (props) => {
     return newValue;
   };
 
+  const resetHandlePercent = createMemo(() => {
+    if (props.dblClickResetValue === undefined) return undefined;
+    const fixed = getFixedValue(props.dblClickResetValue);
+    return ((fixed - props.min) / (props.max - props.min)) * 100;
+  });
+
   const handleClickOutside = (e: MouseEvent) => {
     if (directInputMode() && labelRef && !labelRef.contains(e.target as Node)) {
       update(Number(directInputRef.value));
@@ -241,6 +248,26 @@ const Slider: Component<SliderProps> = (props) => {
       const newValue = value() + delta;
       update(newValue);
     }
+  };
+
+  const handleDoubleClick = () => {
+    if (props.dblClickResetValue !== undefined) {
+      update(props.dblClickResetValue);
+    } else if (props.defaultValue !== undefined) {
+      update(props.defaultValue);
+    }
+
+    props.onDoubleClick?.();
+  };
+
+  const renderResetHandle = () => {
+    const percent = resetHandlePercent();
+    if (percent === undefined) return null;
+    const style =
+      props.orientation === 'vertical'
+        ? { bottom: `${percent}%`, opacity: 0.5 }
+        : { left: `${percent}%`, opacity: 0.5 };
+    return <div style={style} class={props.orientation === 'vertical' ? handleVertical : handle} />;
   };
 
   onMount(() => {
@@ -312,14 +339,13 @@ const Slider: Component<SliderProps> = (props) => {
         class={props.orientation === 'vertical' ? sliderVertical : slider}
         ref={(el) => (sliderRef = el)}
         onPointerDown={handlePointerDown}
-        onDblClick={() => {
-          props.onDoubleClick?.();
-        }}
+        onDblClick={handleDoubleClick}
         onClick={onLineClick}
       >
         <div class={props.orientation === 'vertical' ? lineHitboxVertical : lineHitbox} onWheel={handleOnWheel}>
           <div class={props.orientation === 'vertical' ? lineVertical : line} />
         </div>
+        {renderResetHandle()}
         {props.orientation === 'vertical' ? (
           <div style={{ bottom: `${percent()}%` }} class={handleVertical} />
         ) : (
