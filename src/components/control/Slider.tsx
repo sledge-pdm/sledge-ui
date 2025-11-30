@@ -263,10 +263,7 @@ const Slider: Component<SliderProps> = (props) => {
   const renderResetHandle = () => {
     const percent = resetHandlePercent();
     if (percent === undefined) return null;
-    const style =
-      props.orientation === 'vertical'
-        ? { bottom: `${percent}%`, opacity: 0.5 }
-        : { left: `${percent}%`, opacity: 0.5 };
+    const style = props.orientation === 'vertical' ? { bottom: `${percent}%`, opacity: 0.5 } : { left: `${percent}%`, opacity: 0.5 };
     return <div style={style} class={props.orientation === 'vertical' ? handleVertical : handle} />;
   };
 
