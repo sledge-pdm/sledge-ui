@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "solid-js": "^1.9.10",
-    "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.5"
+    "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.6"
   },
   "devDependencies": {
     "@acab/ecsstatic": "^0.9.0"
