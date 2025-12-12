@@ -84,6 +84,7 @@ export interface MenuListOption {
   color?: string;
   fontFamily?: string;
   onSelect?: () => void;
+  retainAfterSelect?: boolean;
 }
 
 export type MenuListAppearance = 'simple' | 'emphasis';
@@ -162,7 +163,7 @@ export const MenuList: Component<Props> = (props) => {
                 }}
                 onClick={() => {
                   option.onSelect?.();
-                  props.onClose?.();
+                  if (!option.retainAfterSelect) props.onClose?.();
                 }}
               >
                 <Show when={option.icon}>
