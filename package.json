@@ -4,20 +4,37 @@
   "private": false,
   "type": "module",
   "sideEffects": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "solid-js": "^1.9.10",
     "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.6",
     "@sledge/core": "npm:@sledge-pdm/misc@^1.0.0",
     "@sledge/theme": "npm:@sledge-pdm/theme@^1.0.0"
   },
+  "peerDependencies": {
+    "solid-js": "^1.9.10"
+  },
   "devDependencies": {
-    "@acab/ecsstatic": "^0.9.0"
+    "@acab/ecsstatic": "^0.9.0",
+    "vite": "^7.2.6",
+    "vite-plugin-solid": "^2.11.10",
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "dev": "",
-    "build": ""
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "prepublishOnly": "pnpm build",
+    "prepack": "pnpm build"
   }
 }
