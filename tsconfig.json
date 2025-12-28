@@ -11,12 +11,6 @@
     "strict": true,
     "noEmit": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "paths": {
-      "@sledge/core": ["../core"],
-      "@sledge/core/*": ["../core/src/*"],
-      "@sledge/theme": ["../theme"],
-      "@sledge/theme/*": ["../theme/src/*"]
-    }
+    "jsx": "preserve"
   }
 }

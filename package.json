@@ -1,15 +1,17 @@
 {
   "name": "@sledge/ui",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": true,
   "exports": {
     ".": "./index.ts"
   },
   "dependencies": {
     "solid-js": "^1.9.10",
-    "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.6"
+    "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.6",
+    "@sledge/core": "npm:@sledge-pdm/misc@^1.0.0",
+    "@sledge/theme": "npm:@sledge-pdm/theme@^1.0.0"
   },
   "devDependencies": {
     "@acab/ecsstatic": "^0.9.0"
