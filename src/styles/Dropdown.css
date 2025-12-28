@@ -72,3 +72,13 @@
   text-overflow: ellipsis;
   color: var(--color-on-background);
 }
+
+.dropdown-indicator {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 2.5px solid transparent;
+  border-right: 2.5px solid transparent;
+  border-top: 3px solid var(--color-on-background);
+  flex: 0 0 auto;
+}

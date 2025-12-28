@@ -1,10 +1,9 @@
 import { clsx } from '@sledge/core';
-import { color, fonts } from '@sledge/theme';
+import { fonts } from '@sledge/theme';
 import { createEffect, createMemo, createSignal, type JSX, onCleanup, onMount, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import Icon from '../Icon';
-import { MenuList, type MenuListAppearance, type MenuListOption } from '../MenuList';
 import '../../styles/Dropdown.css';
+import { MenuList, type MenuListAppearance, type MenuListOption } from '../MenuList';
 
 const menuDirection = {
   down: 'dropdown-menu-down',
@@ -208,9 +207,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
         <p class='dropdown-item-text' style={{ 'font-family': p.fontFamily ?? fonts.ZFB08, width: p.fullWidth ? '100%' : undefined }}>
           {noItem() ? '- no item -' : getAdjustedLabel(selectedLabel())}
         </p>
-        <div>
-          <Icon src={'/icons/misc/triangle_5.png'} base={5} color={color.onBackground} />
-        </div>
+        <span class='dropdown-indicator' aria-hidden='true' />
       </button>
       <Show when={open()}>
         <Portal>
