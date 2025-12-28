@@ -1,16 +1,4 @@
-import { css } from '@acab/ecsstatic';
-import { type Component, type JSX, splitProps } from 'solid-js';
-
-const iconClass = css`
-  width: var(--icon-size);
-  height: var(--icon-size);
-  background-color: var(--icon-fill);
-  mask: var(--icon-url) center/contain no-repeat;
-  image-rendering: pixelated;
-  &:hover {
-    background-color: var(--icon-hover-fill);
-  }
-`;
+import { createSignal, type Component, type JSX, splitProps } from 'solid-js';
 
 interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   /** 透明背景 + 白(255,255,255) で描いた αマスク PNG */
@@ -26,21 +14,34 @@ interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   transform?: string;
   filter?: string;
   backdropFilter?: string;
+
+  onMouseEnter: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
+  onMouseLeave: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
 }
 
 const Icon: Component<IconProps> = (props: IconProps) => {
-  const [local, rest] = splitProps(props, ['src', 'color', 'hoverColor', 'scale', 'base', 'transform', 'filter', 'backdropFilter']);
+  const [local, rest] = splitProps(props, ['src', 'color', 'hoverColor', 'scale', 'base', 'transform', 'filter', 'backdropFilter', 'onMouseEnter', 'onMouseLeave']);
   const px = (local.base ?? 16) * (local.scale ?? 1);
+  const [isHover, setIsHover] = createSignal(false);
 
   return (
     <div
       {...rest}
-      class={iconClass}
+      onMouseEnter={(e) => {
+        setIsHover(true);
+        local.onMouseEnter?.(e);
+      }}
+      onMouseLeave={(e) => {
+        setIsHover(false);
+        local.onMouseLeave?.(e);
+      }}
       style={{
-        '--icon-size': `${px}px`,
-        '--icon-fill': local.color ?? 'currentColor',
-        '--icon-hover-fill': local.hoverColor ?? local.color ?? 'currentColor',
-        '--icon-url': `url("${local.src}")`,
+        width: `${px}px`,
+        height: `${px}px`,
+        "background-color": isHover() ? local.hoverColor ?? local.color ?? 'currentColor' : local.color ?? 'currentColor',
+        mask: `url("${local.src}") center/contain no-repeat`,
+        '-webkit-mask': `url("${local.src}") center/contain no-repeat`,
+        "image-rendering": 'pixelated',
         transform: local.transform,
         '-webkit-transform': local.transform,
         filter: local.filter,
