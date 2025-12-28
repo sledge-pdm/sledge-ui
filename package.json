@@ -8,15 +8,15 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.6",
+    "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.7",
     "@sledge/core": "npm:@sledge-pdm/misc@^1.0.0",
     "@sledge/theme": "npm:@sledge-pdm/theme@^1.0.1",
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
     "prettier": "^3.7.4",
-    "prettier-plugin-organize-imports": "^4.3.0"
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "typescript": "^5.9.3"
   },
   "scripts": {}
 }

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@sledge/anvil':
-        specifier: npm:@sledge-pdm/anvil@^1.0.6
-        version: '@sledge-pdm/anvil@1.0.6'
+        specifier: npm:@sledge-pdm/anvil@^1.0.7
+        version: '@sledge-pdm/anvil@1.0.7'
       '@sledge/core':
         specifier: npm:@sledge-pdm/misc@^1.0.0
         version: '@sledge-pdm/misc@1.0.0'
@@ -33,8 +33,8 @@ importers:
 
 packages:
 
-  '@sledge-pdm/anvil@1.0.6':
-    resolution: {integrity: sha512-NDgNRQ8Xvr3mwmlHfNKjL+ssy6l5QyGHY3+n1sEJjmAYvXW95KUFn+C2OrY+V5zR0ex9WJz+Fp548PbBUGkvow==}
+  '@sledge-pdm/anvil@1.0.7':
+    resolution: {integrity: sha512-lstIjPKSMqY41cH+NxEACFhllKY5InQAzkME6sYc0DDjzWvdUeVMhJ9CeeiXPB9Lsbv7Q2El5YQCvlEVlssIrg==}
 
   '@sledge-pdm/misc@1.0.0':
     resolution: {integrity: sha512-ZAscD0uZxlzFp6vMQgXktFoSrLyoTzTxG5+YLJfialt63+6+hTQaj1VclBlD9C845rN4X+HUeb8YAp/pTgulAQ==}
@@ -80,13 +80,13 @@ packages:
 
 snapshots:
 
-  '@sledge-pdm/anvil@1.0.6': {}
+  '@sledge-pdm/anvil@1.0.7': {}
 
   '@sledge-pdm/misc@1.0.0': {}
 
   '@sledge-pdm/theme@1.0.1':
     dependencies:
-      '@sledge/anvil': '@sledge-pdm/anvil@1.0.6'
+      '@sledge/anvil': '@sledge-pdm/anvil@1.0.7'
       '@sledge/core': '@sledge-pdm/misc@1.0.0'
 
   csstype@3.2.3: {}
