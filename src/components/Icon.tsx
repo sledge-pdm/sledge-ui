@@ -1,16 +1,4 @@
-import { css } from '@acab/ecsstatic';
-import { type Component, type JSX, splitProps } from 'solid-js';
-
-const iconClass = css`
-  width: var(--icon-size);
-  height: var(--icon-size);
-  background-color: var(--icon-fill);
-  mask: var(--icon-url) center/contain no-repeat;
-  image-rendering: pixelated;
-  &:hover {
-    background-color: var(--icon-hover-fill);
-  }
-`;
+import { createSignal, type Component, type JSX, splitProps } from 'solid-js';
 
 interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   /** 透明背景 + 白(255,255,255) で描いた αマスク PNG */
@@ -31,16 +19,28 @@ interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
 const Icon: Component<IconProps> = (props: IconProps) => {
   const [local, rest] = splitProps(props, ['src', 'color', 'hoverColor', 'scale', 'base', 'transform', 'filter', 'backdropFilter']);
   const px = (local.base ?? 16) * (local.scale ?? 1);
+  const [isHover, setIsHover] = createSignal(false);
+  const onMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (event) => {
+    setIsHover(true);
+    rest.onMouseEnter?.(event);
+  };
+  const onMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (event) => {
+    setIsHover(false);
+    rest.onMouseLeave?.(event);
+  };
 
   return (
     <div
       {...rest}
-      class={iconClass}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       style={{
-        '--icon-size': `${px}px`,
-        '--icon-fill': local.color ?? 'currentColor',
-        '--icon-hover-fill': local.hoverColor ?? local.color ?? 'currentColor',
-        '--icon-url': `url("${local.src}")`,
+        width: `${px}px`,
+        height: `${px}px`,
+        backgroundColor: isHover() ? local.hoverColor ?? local.color ?? 'currentColor' : local.color ?? 'currentColor',
+        mask: `url("${local.src}") center/contain no-repeat`,
+        '-webkit-mask': `url("${local.src}") center/contain no-repeat`,
+        imageRendering: 'pixelated',
         transform: local.transform,
         '-webkit-transform': local.transform,
         filter: local.filter,
