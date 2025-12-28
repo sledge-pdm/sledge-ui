@@ -15,8 +15,8 @@ interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   filter?: string;
   backdropFilter?: string;
 
-  onMouseEnter: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
-  onMouseLeave: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
+  onMouseEnter?: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
+  onMouseLeave?: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
 }
 
 const Icon: Component<IconProps> = (props: IconProps) => {
