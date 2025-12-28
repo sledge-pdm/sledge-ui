@@ -19,9 +19,5 @@
     "prettier-plugin-organize-imports": "^4.3.0"
   },
   "scripts": {
-    "dev": "",
-    "build": "vite build && tsc -p tsconfig.build.json",
-    "prepublishOnly": "pnpm build",
-    "prepack": "pnpm build"
   }
 }
