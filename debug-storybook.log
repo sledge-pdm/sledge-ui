@@ -1,0 +1,14 @@
+[23:03:47.548] [INFO] storybook v10.1.10
+[23:03:48.368] [DEBUG] Getting package.json info for C:/Users/innsb/Documents/sledge-pdm/packages/ui/package.json...
+[23:03:48.969] [ERROR] [38;2;241;97;97mError: You have both a "config.js" and a "preview.js", remove the "config.js" file from your configDir (.\.storybook\config)[39m
+    at loadPreviewOrConfigFile (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/storybook@10.1.10_@testing-_fd7f2e665df58fe994c152c374705d85/node_modules/storybook/dist/_node-chunks/chunk-LLCTWVOB.js:11974:11)
+    at Object.experimental_serverChannel (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/@storybook+addon-vitest@10._dfbe2c36237da87d9b4664b0ae04ccab/node_modules/@storybook/addon-vitest/dist/preset.js:305:65)
+    at async storybookDevServer (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/storybook@10.1.10_@testing-_fd7f2e665df58fe994c152c374705d85/node_modules/storybook/dist/core-server/index.js:6781:147)
+    at async buildOrThrow (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/storybook@10.1.10_@testing-_fd7f2e665df58fe994c152c374705d85/node_modules/storybook/dist/core-server/index.js:5555:12)
+    at async buildDevStandalone (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/storybook@10.1.10_@testing-_fd7f2e665df58fe994c152c374705d85/node_modules/storybook/dist/core-server/index.js:7208:66)
+    at async withTelemetry (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/storybook@10.1.10_@testing-_fd7f2e665df58fe994c152c374705d85/node_modules/storybook/dist/_node-chunks/chunk-PGCRO4IZ.js:209:12)
+    at async dev (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/storybook@10.1.10_@testing-_fd7f2e665df58fe994c152c374705d85/node_modules/storybook/dist/bin/core.js:2734:3)
+    at async _Command.<anonymous> (file:///C:/Users/innsb/Documents/sledge-pdm/packages/ui/node_modules/.pnpm/storybook@10.1.10_@testing-_fd7f2e665df58fe994c152c374705d85/node_modules/storybook/dist/bin/core.js:2801:92)
+[23:03:48.972] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[23:04:04.337] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":false}

@@ -207,7 +207,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
         <p class='dropdown-item-text' style={{ 'font-family': p.fontFamily ?? fonts.ZFB08, width: p.fullWidth ? '100%' : undefined }}>
           {noItem() ? '- no item -' : getAdjustedLabel(selectedLabel())}
         </p>
-        <span class='dropdown-indicator' aria-hidden='true' />
+        <span class='dropdown-indicator' aria-hidden='true' style={{ rotate: open() ? '180deg' : '' }} />
       </button>
       <Show when={open()}>
         <Portal>

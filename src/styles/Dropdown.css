@@ -77,8 +77,9 @@
   display: inline-block;
   width: 0;
   height: 0;
-  border-left: 2.5px solid transparent;
-  border-right: 2.5px solid transparent;
-  border-top: 3px solid var(--color-on-background);
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 4px solid var(--color-on-background);
   flex: 0 0 auto;
+  transform-origin: center 1.5px;
 }
