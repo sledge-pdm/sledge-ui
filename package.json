@@ -5,7 +5,7 @@
   "type": "module",
   "sideEffects": true,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./index.ts"
   },
   "dependencies": {
     "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.6",
