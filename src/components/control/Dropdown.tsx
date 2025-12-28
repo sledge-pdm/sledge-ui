@@ -1,87 +1,15 @@
-import { css } from '@acab/ecsstatic';
 import { clsx } from '@sledge/core';
 import { color, fonts } from '@sledge/theme';
 import { createEffect, createMemo, createSignal, type JSX, onCleanup, onMount, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import Icon from '../Icon';
 import { MenuList, type MenuListAppearance, type MenuListOption } from '../MenuList';
-
-// Recreate previous style tokens via CSS variables (vars -> CSS custom properties)
-const dropdownContainer = css`
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
-`;
-
-const triggerButton = css`
-  display: flex;
-  flex-direction: row;
-  background-color: var(--color-controls);
-  padding: 5px 11px 5px 11px;
-  width: fit-content;
-  text-align: left;
-  min-width: 100px;
-  max-width: 100%;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  &:hover {
-    transform: none;
-  }
-  &:hover {
-    background-color: var(--color-button-hover);
-  }
-  &:active {
-    background-color: var(--color-button-hover);
-  }
-`;
-
-const triggerButtonNoBG = css`
-  background: none !important;
-  background-color: none !important;
-  border: 1px solid transparent !important;
-`;
-
-const triggerButtonSimple = css`
-  border: 1px solid var(--color-border);
-  border-radius: 1px;
-`;
-
-const triggerButtonEmphasis = css`
-  border: 1px solid var(--color-on-background-secondary);
-  border-radius: 4px;
-`;
+import '../../styles/Dropdown.css';
 
 const menuDirection = {
-  down: css`
-    top: 100%;
-    bottom: auto;
-    margin-top: 0px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  `,
-  up: css`
-    top: auto;
-    bottom: 100%;
-    margin-bottom: 0px;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-  `,
-};
-
-const itemText = css`
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--color-on-background);
-`;
-
-const menuStyle = css`
-  position: fixed;
-  margin-top: 4px;
-  margin-left: 4px;
-  min-width: 100%;
-  z-index: var(--zindex-dropdown-menu);
-`;
+  down: 'dropdown-menu-down',
+  up: 'dropdown-menu-up',
+} as const;
 
 export type DropdownOption<T extends string | number> = {
   label: string;
@@ -237,11 +165,11 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     p.onChange?.(next);
   };
 
-  const triggerButtonAdd = p.appearance === 'simple' ? triggerButtonSimple : triggerButtonEmphasis;
+  const triggerButtonAdd = p.appearance === 'simple' ? 'dropdown-trigger-simple' : 'dropdown-trigger-emphasis';
 
   return (
     <div
-      class={dropdownContainer}
+      class='dropdown-container'
       ref={(ref) => {
         containerRef = ref;
         p.ref?.(ref);
@@ -260,7 +188,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
     >
       <button
         type='button'
-        class={clsx(triggerButton, triggerButtonAdd, p.noBackground && triggerButtonNoBG)}
+        class={clsx('dropdown-trigger', triggerButtonAdd, p.noBackground && 'dropdown-trigger-no-bg')}
         style={{
           display: 'flex',
           'flex-direction': 'row',
@@ -277,7 +205,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
         aria-expanded={open()}
         {...p.buttonProps}
       >
-        <p class={itemText} style={{ 'font-family': p.fontFamily ?? fonts.ZFB08, width: p.fullWidth ? '100%' : undefined }}>
+        <p class='dropdown-item-text' style={{ 'font-family': p.fontFamily ?? fonts.ZFB08, width: p.fullWidth ? '100%' : undefined }}>
           {noItem() ? '- no item -' : getAdjustedLabel(selectedLabel())}
         </p>
         <div>
@@ -289,7 +217,7 @@ const Dropdown = <T extends string | number>(p: Props<T>) => {
           <MenuList
             appearance={p.appearance}
             ref={menuRef}
-            class={clsx(menuStyle, menuDirection[dir()])}
+            class={clsx('dropdown-menu', menuDirection[dir()])}
             options={menuListOptions()}
             onWheel={(e) => {
               e.stopImmediatePropagation();

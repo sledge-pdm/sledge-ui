@@ -1,0 +1,104 @@
+.slider-root {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.slider-label-container {
+  display: flex;
+  flex-direction: row;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+
+.slider-label {
+  white-space: nowrap;
+  width: fit-content;
+  margin-right: 16px;
+}
+
+.slider-label-input {
+  white-space: nowrap;
+  width: fit-content;
+  letter-spacing: 1px;
+}
+
+.slider {
+  position: relative;
+  align-items: center;
+  display: flex;
+  height: auto;
+  overflow: visible;
+  flex-grow: 1;
+  touch-action: none;
+}
+
+.slider-vertical {
+  position: relative;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: visible;
+  width: auto;
+  touch-action: none;
+}
+
+.slider-line-hitbox {
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  height: 16px;
+  position: absolute;
+  width: 100%;
+}
+
+.slider-line-hitbox-vertical {
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  width: 16px;
+  position: absolute;
+  height: 100%;
+}
+
+.slider-line {
+  background-color: var(--color-on-background);
+  display: flex;
+  height: 1px;
+  pointer-events: none;
+  width: 100%;
+}
+
+.slider-line-vertical {
+  background-color: var(--color-on-background);
+  display: flex;
+  width: 1px;
+  pointer-events: none;
+  height: 100%;
+}
+
+.slider-handle {
+  background-color: var(--color-on-background);
+  height: 8px;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 2px;
+}
+
+.slider-handle-vertical {
+  background-color: var(--color-on-background);
+  width: 8px;
+  bottom: 50%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(50%);
+  height: 2px;
+}

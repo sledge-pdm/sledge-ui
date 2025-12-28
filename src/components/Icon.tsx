@@ -1,4 +1,7 @@
-import { createSignal, type Component, type JSX, splitProps } from 'solid-js';
+
+import { clsx } from '@sledge/core';
+import { type Component, type JSX, splitProps } from 'solid-js';
+import '../styles/Icon.css';
 
 interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   /** 透明背景 + 白(255,255,255) で描いた αマスク PNG */
@@ -14,34 +17,21 @@ interface IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
   transform?: string;
   filter?: string;
   backdropFilter?: string;
-
-  onMouseEnter?: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
-  onMouseLeave?: (e: MouseEvent & { currentTarget: HTMLDivElement; target: Element; }) => void;
 }
 
 const Icon: Component<IconProps> = (props: IconProps) => {
-  const [local, rest] = splitProps(props, ['src', 'color', 'hoverColor', 'scale', 'base', 'transform', 'filter', 'backdropFilter', 'onMouseEnter', 'onMouseLeave']);
+  const [local, rest] = splitProps(props, ['src', 'color', 'hoverColor', 'scale', 'base', 'transform', 'filter', 'backdropFilter', 'class']);
   const px = (local.base ?? 16) * (local.scale ?? 1);
-  const [isHover, setIsHover] = createSignal(false);
 
   return (
     <div
       {...rest}
-      onMouseEnter={(e) => {
-        setIsHover(true);
-        local.onMouseEnter?.(e);
-      }}
-      onMouseLeave={(e) => {
-        setIsHover(false);
-        local.onMouseLeave?.(e);
-      }}
+      class={clsx('icon', local.class)}
       style={{
-        width: `${px}px`,
-        height: `${px}px`,
-        "background-color": isHover() ? local.hoverColor ?? local.color ?? 'currentColor' : local.color ?? 'currentColor',
-        mask: `url("${local.src}") center/contain no-repeat`,
-        '-webkit-mask': `url("${local.src}") center/contain no-repeat`,
-        "image-rendering": 'pixelated',
+        '--icon-size': `${px}px`,
+        '--icon-fill': local.color ?? 'currentColor',
+        '--icon-hover-fill': local.hoverColor ?? local.color ?? 'currentColor',
+        '--icon-url': `url("${local.src}")`,
         transform: local.transform,
         '-webkit-transform': local.transform,
         filter: local.filter,

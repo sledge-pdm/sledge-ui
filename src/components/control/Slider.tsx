@@ -1,100 +1,6 @@
-import { css } from '@acab/ecsstatic';
 import { type Component, createEffect, createMemo, createSignal, onCleanup, onMount, Show } from 'solid-js';
 import type { LabelMode } from '../../types';
-
-const sliderRoot = css`
-  position: relative;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-`;
-const valueLabelContainer = css`
-  display: flex;
-  flex-direction: row;
-  box-sizing: content-box;
-  overflow: hidden;
-`;
-const valueLabel = css`
-  white-space: nowrap;
-  width: fit-content;
-  margin-right: 16px;
-`;
-const valueLabelInput = css`
-  white-space: nowrap;
-  width: fit-content;
-  letter-spacing: 1px;
-`;
-const slider = css`
-  position: relative;
-  align-items: center;
-  display: flex;
-  height: auto;
-  overflow: visible;
-  flex-grow: 1;
-  touch-action: none;
-`;
-const sliderVertical = css`
-  position: relative;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: visible;
-  width: auto;
-  touch-action: none;
-`;
-const lineHitbox = css`
-  align-items: center;
-  background-color: transparent;
-  cursor: pointer;
-  display: flex;
-  height: 16px;
-  position: absolute;
-  width: 100%;
-`;
-const lineHitboxVertical = css`
-  align-items: center;
-  background-color: transparent;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  width: 16px;
-  position: absolute;
-  height: 100%;
-`;
-const line = css`
-  background-color: var(--color-on-background);
-  display: flex;
-  height: 1px;
-  pointer-events: none;
-  width: 100%;
-`;
-const lineVertical = css`
-  background-color: var(--color-on-background);
-  display: flex;
-  width: 1px;
-  pointer-events: none;
-  height: 100%;
-`;
-const handle = css`
-  background-color: var(--color-on-background);
-  height: 8px;
-  left: 50%;
-  pointer-events: none;
-  position: absolute;
-  transform: translateX(-50%);
-  width: 2px;
-`;
-const handleVertical = css`
-  background-color: var(--color-on-background);
-  width: 8px;
-  bottom: 50%;
-  pointer-events: none;
-  position: absolute;
-  transform: translateY(50%);
-  height: 2px;
-`;
+import '../../styles/Slider.css';
 
 interface SliderProps {
   min: number;
@@ -264,7 +170,7 @@ const Slider: Component<SliderProps> = (props) => {
     const percent = resetHandlePercent();
     if (percent === undefined) return null;
     const style = props.orientation === 'vertical' ? { bottom: `${percent}%`, opacity: 0.5 } : { left: `${percent}%`, opacity: 0.5 };
-    return <div style={style} class={props.orientation === 'vertical' ? handleVertical : handle} />;
+    return <div style={style} class={props.orientation === 'vertical' ? 'slider-handle-vertical' : 'slider-handle'} />;
   };
 
   onMount(() => {
@@ -283,7 +189,7 @@ const Slider: Component<SliderProps> = (props) => {
   const labelArea = (
     <div
       ref={(el) => (labelRef = el)}
-      class={valueLabelContainer}
+      class='slider-label-container'
       onWheel={handleOnWheel}
       title={props.title}
       style={{
@@ -295,7 +201,7 @@ const Slider: Component<SliderProps> = (props) => {
         when={directInputMode()}
         fallback={
           <p
-            class={valueLabel}
+            class='slider-label'
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -309,7 +215,7 @@ const Slider: Component<SliderProps> = (props) => {
         }
       >
         <input
-          class={valueLabelInput}
+          class='slider-label-input'
           ref={(el) => (directInputRef = el)}
           onSubmit={(e) => {
             setDirectInputMode(false);
@@ -329,24 +235,24 @@ const Slider: Component<SliderProps> = (props) => {
   );
 
   return (
-    <div class={sliderRoot}>
+    <div class='slider-root'>
       <Show when={props.labelMode === 'left'}>{labelArea}</Show>
 
       <div
-        class={props.orientation === 'vertical' ? sliderVertical : slider}
+        class={props.orientation === 'vertical' ? 'slider-vertical' : 'slider'}
         ref={(el) => (sliderRef = el)}
         onPointerDown={handlePointerDown}
         onDblClick={handleDoubleClick}
         onClick={onLineClick}
       >
-        <div class={props.orientation === 'vertical' ? lineHitboxVertical : lineHitbox} onWheel={handleOnWheel}>
-          <div class={props.orientation === 'vertical' ? lineVertical : line} />
+        <div class={props.orientation === 'vertical' ? 'slider-line-hitbox-vertical' : 'slider-line-hitbox'} onWheel={handleOnWheel}>
+          <div class={props.orientation === 'vertical' ? 'slider-line-vertical' : 'slider-line'} />
         </div>
         {renderResetHandle()}
         {props.orientation === 'vertical' ? (
-          <div style={{ bottom: `${percent()}%` }} class={handleVertical} />
+          <div style={{ bottom: `${percent()}%` }} class='slider-handle-vertical' />
         ) : (
-          <div style={{ left: `${percent()}%` }} class={handle} />
+          <div style={{ left: `${percent()}%` }} class='slider-handle' />
         )}
       </div>
 

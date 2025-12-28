@@ -1,20 +1,5 @@
-import { css } from '@acab/ecsstatic';
 import { type Component, createEffect, createSignal, onMount } from 'solid-js';
-
-const containerStyle = css`
-  position: relative;
-  background: #00000017;
-  border: 1px solid var(--color-border);
-  box-sizing: content-box;
-`;
-
-const canvasStyle = css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  image-rendering: pixelated;
-  box-sizing: content-box;
-`;
+import '../styles/SparkLine.css';
 
 interface SparkLineProps {
   height: number;
@@ -96,7 +81,7 @@ export const SparkLine: Component<SparkLineProps> = (props) => {
   return (
     <div
       ref={(el) => (container = el)}
-      class={containerStyle}
+      class='sparkline-container'
       style={{
         width: `${props.length * lengthMult()}px`,
         height: `${props.height}px`,
@@ -104,7 +89,7 @@ export const SparkLine: Component<SparkLineProps> = (props) => {
     >
       <canvas
         ref={(el) => (canvas = el)}
-        class={canvasStyle}
+        class='sparkline-canvas'
         style={{
           width: `${props.length * lengthMult()}px`,
           height: `${props.height}px`,

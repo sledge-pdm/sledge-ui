@@ -1,40 +1,6 @@
-import { css } from '@acab/ecsstatic';
 import { colorMatch, hexToRGBA, hexWithSharpToRGBA, RGBAToHex, type RGBA } from '@sledge/anvil';
 import { createMemo, Show, type Accessor, type Component } from 'solid-js';
-
-const outerContainer = css`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-`;
-const background = css`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`;
-const cursor = css`
-  margin: 0;
-  padding: 0;
-  backdrop-filter: invert();
-  filter: grayscale() contrast(20) contrast(20);
-  pointer-events: none;
-`;
-const disabledBorder = css`
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 150%;
-  height: 1px;
-  top: 50%;
-  transform-origin: 50% 50%;
-  transform: translateY(-50%) rotate(45deg);
-  backdrop-filter: invert(50%);
-  pointer-events: none;
-`;
+import '../styles/ColorBox.css';
 
 interface ColorBoxProps {
   class?: string;
@@ -91,7 +57,7 @@ const ColorBox: Component<ColorBoxProps> = (props: ColorBoxProps) => {
   return (
     <div class={props.class}>
       <div
-        class={outerContainer}
+        class='color-box-outer'
         style={{
           width: `${size()}px`,
           height: `${size()}px`,
@@ -101,7 +67,7 @@ const ColorBox: Component<ColorBoxProps> = (props: ColorBoxProps) => {
         }}
       >
         <div
-          class={background}
+          class='color-box-bg'
           style={{
             width: `${size()}px`,
             height: `${size()}px`,
@@ -112,7 +78,7 @@ const ColorBox: Component<ColorBoxProps> = (props: ColorBoxProps) => {
 
         <Show when={props.enableUsingSelection && isSelected()}>
           <div
-            class={cursor}
+            class='color-box-cursor'
             style={{
               width: `${Math.round(size() / 3)}px`,
               height: `${Math.round(size() / 3)}px`,
@@ -124,7 +90,7 @@ const ColorBox: Component<ColorBoxProps> = (props: ColorBoxProps) => {
         </Show>
 
         <Show when={props.showDisabledBorder && !isSelected()}>
-          <div class={disabledBorder} />
+          <div class='color-box-disabled-border' />
         </Show>
       </div>
     </div>

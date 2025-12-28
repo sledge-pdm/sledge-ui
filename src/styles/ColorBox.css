@@ -1,0 +1,36 @@
+.color-box-outer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.color-box-bg {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.color-box-cursor {
+  margin: 0;
+  padding: 0;
+  backdrop-filter: invert();
+  filter: grayscale() contrast(20) contrast(20);
+  pointer-events: none;
+}
+
+.color-box-disabled-border {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 150%;
+  height: 1px;
+  top: 50%;
+  transform-origin: 50% 50%;
+  transform: translateY(-50%) rotate(45deg);
+  backdrop-filter: invert(50%);
+  pointer-events: none;
+}

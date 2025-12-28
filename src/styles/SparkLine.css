@@ -1,0 +1,14 @@
+.sparkline-container {
+  position: relative;
+  background: #00000017;
+  border: 1px solid var(--color-border);
+  box-sizing: content-box;
+}
+
+.sparkline-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  image-rendering: pixelated;
+  box-sizing: content-box;
+}

@@ -1,14 +1,8 @@
-import { css } from '@acab/ecsstatic';
 import type { Vec2 } from '@sledge/core';
 import { createEffect, createSignal, onMount, type Component } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import { MenuList, type MenuListAppearance, type MenuListOption } from './MenuList';
-
-const menuStyle = css`
-  position: fixed;
-  margin-top: 4px;
-  margin-left: 4px;
-`;
+import '../styles/ContextMenuList.css';
 
 interface Props {
   appearance?: MenuListAppearance;
@@ -54,7 +48,7 @@ export const ContextMenuList: Component<Props> = (props) => {
       <MenuList
         appearance={props.appearance}
         ref={(ref) => (containerRef = ref)}
-        class={menuStyle}
+        class='context-menu'
         closeByOutsideClick
         onClose={() => props.onClose?.()}
         options={props.options}

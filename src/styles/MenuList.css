@@ -1,0 +1,71 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  z-index: var(--zindex-dropdown-menu);
+  background-color: var(--color-background);
+  overflow-y: auto;
+}
+
+.menu-simple {
+  border: 1px solid var(--color-border);
+  border-radius: 1px;
+}
+
+.menu-emphasis {
+  border: 1px solid var(--color-on-background);
+  border-radius: 4px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 8px 10px 8px 10px;
+  overflow: hidden;
+  gap: 12px;
+  z-index: var(--zindex-dropdown-menu);
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: var(--color-surface);
+}
+
+.menu-label {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 6px 8px 6px 8px;
+  overflow: hidden;
+  gap: 12px;
+  opacity: 0.8;
+}
+
+.menu-divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 1px 4px;
+}
+
+.menu-item-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: 100%;
+}
+
+.menu-dir-down {
+  top: 100%;
+  bottom: auto;
+  margin-top: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.menu-dir-up {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 0px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.25);
+}

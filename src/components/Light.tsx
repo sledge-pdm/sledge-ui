@@ -1,10 +1,6 @@
-import { css } from '@acab/ecsstatic';
 import { clsx } from '@sledge/core';
 import { type Component, Show } from 'solid-js';
-
-const svgStyle = css`
-  overflow: visible;
-`;
+import '../styles/Light.css';
 
 interface LightProps {
   class?: string;
@@ -19,7 +15,7 @@ const Light: Component<LightProps> = (props: LightProps) => {
 
   return (
     <svg
-      class={clsx(svgStyle, props.class)}
+      class={clsx('light-svg', props.class)}
       style={{
         width: `${width}px`,
         height: `${height}px`,

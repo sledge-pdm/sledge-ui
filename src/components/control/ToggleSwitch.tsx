@@ -1,49 +1,6 @@
-import { css } from '@acab/ecsstatic';
 import { Show, type Component } from 'solid-js';
 import type { LabelMode } from '../../types';
-
-const toggleWrapper = css`
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  cursor: pointer;
-  user-select: none;
-`;
-const toggleInput = css`
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-`;
-const toggleTrack = css`
-  width: 16px;
-  height: 10px;
-  background-color: var(--color-muted);
-  border: 1px solid var(--color-button-border);
-  border-radius: 0px;
-  position: relative;
-  transition: background-color 0.05s;
-`;
-const toggleThumb = css`
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 8px;
-  height: 10px;
-  background-color: white;
-  border: 1px solid var(--color-button-border);
-  border-radius: 0px;
-  transition: transform 0.02s;
-`;
-// State styles via sibling selectors
-const toggleState = css`
-  input:checked + ${toggleTrack} {
-    background-color: var(--color-enabled);
-  }
-  input:checked + ${toggleTrack} ${toggleThumb} {
-    transform: translateX(8px);
-  }
-`;
+import '../../styles/ToggleSwitch.css';
 
 interface Props {
   id?: string;
@@ -61,11 +18,11 @@ const ToggleSwitch: Component<Props> = (p) => {
 
   return (
     /* label 全体でクリック可能に */
-    <label class={`${toggleWrapper} ${toggleState}`} title={p.title}>
+    <label class='toggle-wrapper' title={p.title}>
       <Show when={p.labelMode === 'left'}>{p.children}</Show>
-      <input id={p.id} type='checkbox' name={p.name} checked={p.checked} onInput={(e) => p.onChange?.(e.currentTarget.checked)} class={toggleInput} />
-      <span class={toggleTrack}>
-        <span class={toggleThumb} />
+      <input id={p.id} type='checkbox' name={p.name} checked={p.checked} onInput={(e) => p.onChange?.(e.currentTarget.checked)} class='toggle-input' />
+      <span class='toggle-track'>
+        <span class='toggle-thumb' />
       </span>
       <Show when={p.labelMode === 'right'}>{p.children}</Show>
     </label>

@@ -1,5 +1,4 @@
-import { createSignal, type Component } from 'solid-js';
-import type { JSX } from 'solid-js/h/jsx-runtime';
+import { createSignal, type Component, type JSX } from 'solid-js';
 
 // Button styles are already handled by global.css, no additional styles needed
 
