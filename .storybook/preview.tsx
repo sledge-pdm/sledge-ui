@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import { applyTheme } from '@sledge/theme';
 import '@sledge/theme/global.css';
 import addonA11y from '@storybook/addon-a11y';
