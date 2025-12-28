@@ -1,6 +1,6 @@
 {
   "name": "@sledge-pdm/ui",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": false,
   "type": "module",
   "sideEffects": true,
@@ -18,6 +18,5 @@
     "prettier": "^3.7.4",
     "prettier-plugin-organize-imports": "^4.3.0"
   },
-  "scripts": {
-  }
+  "scripts": {}
 }
