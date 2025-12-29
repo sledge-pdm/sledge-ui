@@ -1,4 +1,4 @@
-import { colorMatch, hexToRGBA, hexWithSharpToRGBA, RGBAToHex, type RGBA } from '@sledge-pdm/anvil';
+import { colorMatch, hexToRGBA, hexWithSharpToRGBA, RGBAToHex, type RGBA } from '@sledge-pdm/core';
 import { createMemo, Show, type Accessor, type Component } from 'solid-js';
 import '../styles/ColorBox.css';
 

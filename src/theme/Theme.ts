@@ -1,4 +1,4 @@
-import { RGBAToHex, colorMatch, hexToRGBA, hexWithSharpToRGBA, type RGBA } from '@sledge-pdm/anvil';
+import { RGBAToHex, colorMatch, hexToRGBA, hexWithSharpToRGBA, type RGBA } from '@sledge-pdm/core';
 import { getCSSProperty, setCSSProperty } from './vars';
 
 export type Theme = 'os' | 'light' | 'dark' | 'dark-gy-flip' | 'black';
