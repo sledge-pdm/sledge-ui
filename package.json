@@ -1,6 +1,6 @@
 {
   "name": "@sledge-pdm/ui",
-  "version": "1.0.14",
+  "version": "1.1.0",
   "private": false,
   "type": "module",
   "sideEffects": true,
@@ -41,5 +41,9 @@
   "scripts": {
     "build": "storybook build",
     "storybook": "storybook dev -p 6006"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   }
 }
