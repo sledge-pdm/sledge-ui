@@ -50,3 +50,5 @@ post_build.bat
 .tauri
 
 /*.tgz
+
+debug-storybook.log
