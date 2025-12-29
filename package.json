@@ -11,7 +11,7 @@
   "dependencies": {
     "@chromatic-com/storybook": "^4.1.3",
     "@sledge-pdm/anvil": "^1.1.1",
-    "@sledge-pdm/core": "^1.0.3",
+    "@sledge-pdm/core": "^1.0.4",
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
