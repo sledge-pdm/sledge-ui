@@ -1,0 +1,329 @@
+/* Font face definitions in CSS format */
+@font-face {
+  font-family: 'ZFB03';
+  src: url('/assets/fonts/04B/04B_03__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB03B';
+  src: url('/assets/fonts/04B/04B_03B_.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB08';
+  src: url('/assets/fonts/04B/04B_08__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB09';
+  src: url('/assets/fonts/04B/04B_09__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB11';
+  src: url('/assets/fonts/04B/04B_11__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB19';
+  src: url('/assets/fonts/04B/04B_19__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB20';
+  src: url('/assets/fonts/04B/04B_20__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB21';
+  src: url('/assets/fonts/04B/04B_21__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB24';
+  src: url('/assets/fonts/04B/04B_24__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB25';
+  src: url('/assets/fonts/04B/04B_25__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB30';
+  src: url('/assets/fonts/04B/04B_30__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZFB31';
+  src: url('/assets/fonts/04B/04B_31__.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Terminus;
+  src: url('/assets/fonts/terminus/TerminusTTF-4.49.3.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'k8x12';
+  src: url('/assets/fonts/k8x12/k8x12.ttf');
+  font-display: swap;
+  size-adjust: 75%;
+}
+
+@font-face {
+  font-family: 'k8x12L';
+  src: url('/assets/fonts/k8x12/k8x12L.ttf');
+  font-display: swap;
+  size-adjust: 75%;
+}
+
+@font-face {
+  font-family: 'k8x12S';
+  src: url('/assets/fonts/k8x12/k8x12S.ttf');
+  font-display: swap;
+  size-adjust: 75%;
+}
+
+@font-face {
+  font-family: 'k12x8';
+  src: url('/assets/fonts/k12x8/k12x8.ttf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PM10';
+  src: url('/assets/fonts/PixelMPlus/PixelMplus10-Regular.ttf');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PM10';
+  src: url('/assets/fonts/PixelMPlus/PixelMplus10-Bold.ttf');
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PM12';
+  src: url('/assets/fonts/PixelMPlus/PixelMplus12-Regular.ttf');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PM12';
+  src: url('/assets/fonts/PixelMPlus/PixelMplus12-Bold.ttf');
+  font-weight: bold;
+  font-display: swap;
+}
+
+:root {
+  /* Sizes */
+  --size-bottom-info: 20px;
+  --size-dialog-radius: 6px;
+  --size-button-radius: 2px;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+
+  /* Text sizes */
+  --text-xs: 6px;
+  --text-sm: 8px;
+  --text-md: 10px;
+  --text-lg: 12px;
+  --text-xl: 16px;
+
+  /* Font families */
+  --font-body: 'ZFB08', 'k12x8', monospace;
+
+  /* Z indexes */
+  --zindex-layer-preview: 100;
+  --zindex-zoom-pan-wrapper: 200;
+  --zindex-webgl-canvas: 300;
+  --zindex-interact-area: 500;
+  --zindex-canvas-overlay: 700;
+  --zindex-image-pool: 800;
+  --zindex-image-pool-image: 830;
+  --zindex-image-pool-menu: 850;
+  --zindex-image-pool-control: 880;
+  --zindex-selection-menu: 900;
+  --zindex-canvas-resize-frame: 950;
+  --zindex-canvas-error-overlay: 999;
+  --zindex-title-bar: 1000;
+  --zindex-side-section: 1000;
+  --zindex-side-section-fade: 1050;
+  --zindex-bottom-info: 1100;
+  --zindex-dialog: 2000;
+  --zindex-dropdown-menu: 2500;
+  --zindex-context-menu: 3000;
+  --zindex-modal-dialog: 4000;
+  --zindex-tooltip: 5000;
+  --zindex-floating-controller: 6000;
+  --zindex-debug-menu: 7000;
+}
+
+/* Global base styles using CSS custom properties */
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-body);
+}
+
+div {
+  box-sizing: border-box;
+}
+
+button,
+p,
+a,
+blockquote,
+code,
+input,
+label,
+span,
+textarea {
+  font-family: var(--font-body);
+  color: var(--color-on-background);
+  text-rendering: geometricprecision;
+}
+
+p,
+a,
+label,
+blockquote,
+code {
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+button {
+  background: var(--color-button-bg);
+  border: 1px solid var(--color-button-border);
+  border-radius: var(--size-button-radius);
+  cursor: pointer;
+  font-size: 8px;
+  height: fit-content;
+  padding: 2px 6px;
+  pointer-events: all;
+  overflow: visible;
+  width: fit-content;
+}
+
+button:disabled {
+  color: var(--color-muted);
+  border-color: var(--color-muted);
+  pointer-events: none;
+}
+
+button:hover {
+  background: var(--color-button-hover);
+}
+
+button:active {
+  background: var(--color-button-active);
+  transform: translateY(1px);
+}
+
+/* Reset styles */
+main {
+  width: 100vw;
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: var(--color-background);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+input,
+textarea {
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 1px solid var(--color-on-background);
+  font-size: 0.5rem;
+  user-select: initial;
+  -webkit-user-select: initial;
+  cursor: text;
+  pointer-events: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* Utility classes */
+.accented-button {
+  width: fit-content;
+  border: 1px solid var(--color-accent);
+  background: var(--color-button-bg);
+  color: var(--color-accent);
+  pointer-events: all;
+}
+
+.accented-button:hover {
+  color: #fff;
+  background: var(--color-accent);
+}
+
+.accented-button:disabled {
+  color: var(--color-muted);
+  border: 1px solid var(--color-muted);
+  pointer-events: none;
+}
+
+.page-root {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  background-color: var(--color-background);
+}
+
+.sledge-logo {
+  bottom: 2px;
+  position: absolute;
+  right: 2px;
+}

@@ -1,9 +1,9 @@
 import { clsx } from '@sledge/core';
-import { fonts } from '@sledge/theme';
 import { createEffect, createMemo, createSignal, type JSX, onCleanup, onMount, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import '../../styles/Dropdown.css';
 import { MenuList, type MenuListAppearance, type MenuListOption } from '../MenuList';
+import { fonts } from 'src/theme/fonts';
 
 const menuDirection = {
   down: 'dropdown-menu-down',

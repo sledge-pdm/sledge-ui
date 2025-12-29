@@ -16,3 +16,8 @@ export * from './src/config/path';
 export { ConfigFieldRenderer } from './src/config/renderer';
 export * from './src/config/types';
 export { type LabelMode } from './src/types';
+
+// theme
+export * from './src/theme/fonts';
+export * from './src/theme/Theme';
+export * from './src/theme/vars';

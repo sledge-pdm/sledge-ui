@@ -14,12 +14,6 @@ importers:
       '@sledge/anvil':
         specifier: npm:@sledge-pdm/anvil@^1.0.7
         version: '@sledge-pdm/anvil@1.0.7'
-      '@sledge/core':
-        specifier: npm:@sledge-pdm/misc@^1.0.0
-        version: '@sledge-pdm/misc@1.0.0'
-      '@sledge/theme':
-        specifier: npm:@sledge-pdm/theme@^1.0.3
-        version: '@sledge-pdm/theme@1.0.3'
       solid-js:
         specifier: ^1.9.10
         version: 1.9.10
@@ -520,12 +514,6 @@ packages:
 
   '@sledge-pdm/anvil@1.0.7':
     resolution: {integrity: sha512-lstIjPKSMqY41cH+NxEACFhllKY5InQAzkME6sYc0DDjzWvdUeVMhJ9CeeiXPB9Lsbv7Q2El5YQCvlEVlssIrg==}
-
-  '@sledge-pdm/misc@1.0.0':
-    resolution: {integrity: sha512-ZAscD0uZxlzFp6vMQgXktFoSrLyoTzTxG5+YLJfialt63+6+hTQaj1VclBlD9C845rN4X+HUeb8YAp/pTgulAQ==}
-
-  '@sledge-pdm/theme@1.0.3':
-    resolution: {integrity: sha512-pQ0fzO4BNoOM/SA6NRzj7BOUxGiX/1M0LAbwzQl1QvGyuRRcQOItJgsQload62SmwVU6zw8bZRc48f60W54ZCA==}
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
@@ -2231,13 +2219,6 @@ snapshots:
     optional: true
 
   '@sledge-pdm/anvil@1.0.7': {}
-
-  '@sledge-pdm/misc@1.0.0': {}
-
-  '@sledge-pdm/theme@1.0.3':
-    dependencies:
-      '@sledge/anvil': '@sledge-pdm/anvil@1.0.7'
-      '@sledge/core': '@sledge-pdm/misc@1.0.0'
 
   '@standard-schema/spec@1.1.0': {}
 
