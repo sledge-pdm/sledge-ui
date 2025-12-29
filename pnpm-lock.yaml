@@ -15,8 +15,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       '@sledge-pdm/core':
-        specifier: ^1.0.3
-        version: 1.0.3
+        specifier: ^1.0.4
+        version: 1.0.4
       solid-js:
         specifier: ^1.9.10
         version: 1.9.10
@@ -518,8 +518,8 @@ packages:
   '@sledge-pdm/anvil@1.1.1':
     resolution: {integrity: sha512-LwzRENWam46zvyPySGwSQ3fCmYx76+oy8FUtOFz90lcQtaLNEcZNz6YUxgn2l6xQzxDv4dpY857aO41J5okXBQ==, tarball: https://npm.pkg.github.com/download/@sledge-pdm/anvil/1.1.1/ef31a06fe76f23321a65628b63b1ab7e4f1b2538}
 
-  '@sledge-pdm/core@1.0.3':
-    resolution: {integrity: sha512-dHK9WRct6im18x2e++cqlG+wmct9S44AwjIBsfkFzUMOLcpEKy414jO41DHprccm5P8ec4fGGemVLEMBEFLy+g==, tarball: https://npm.pkg.github.com/download/@sledge-pdm/core/1.0.3/6a502dbf560d67ce03ae03dab9348aeb2e878121}
+  '@sledge-pdm/core@1.0.4':
+    resolution: {integrity: sha512-XJEmVzg6hqoIeGeJYiZ/nP6pKQoZRX0+SQNCgQxfAo78O9vVCGFRZ7dloxgG7RYaxSO2xbHuvpU/owOCqQ1iOA==, tarball: https://npm.pkg.github.com/download/@sledge-pdm/core/1.0.4/8ba30c5f593857482fd3faf1fa6fcce70a03e5a5}
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
@@ -2226,7 +2226,7 @@ snapshots:
 
   '@sledge-pdm/anvil@1.1.1': {}
 
-  '@sledge-pdm/core@1.0.3': {}
+  '@sledge-pdm/core@1.0.4': {}
 
   '@standard-schema/spec@1.1.0': {}
 
