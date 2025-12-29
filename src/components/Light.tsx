@@ -1,4 +1,4 @@
-import { clsx } from '@sledge/core';
+import { clsx } from '@sledge-pdm/core';
 import { type Component, Show } from 'solid-js';
 import '../styles/Light.css';
 

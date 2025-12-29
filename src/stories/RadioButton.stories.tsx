@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from 'storybook-solidjs-vite';
 import { createSignal } from 'solid-js';
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
 import RadioButton from '../components/control/RadioButton';
 
 const meta: Meta<typeof RadioButton> = {
@@ -15,18 +15,8 @@ export const Group: Story = {
     const [selected, setSelected] = createSignal<'a' | 'b'>('a');
     return (
       <div style={{ display: 'flex', gap: '12px' }}>
-        <RadioButton
-          name='radio-group'
-          label='Option A'
-          value={selected() === 'a'}
-          onChange={(checked) => checked && setSelected('a')}
-        />
-        <RadioButton
-          name='radio-group'
-          label='Option B'
-          value={selected() === 'b'}
-          onChange={(checked) => checked && setSelected('b')}
-        />
+        <RadioButton name='radio-group' label='Option A' value={selected() === 'a'} onChange={(checked) => checked && setSelected('a')} />
+        <RadioButton name='radio-group' label='Option B' value={selected() === 'b'} onChange={(checked) => checked && setSelected('b')} />
       </div>
     );
   },

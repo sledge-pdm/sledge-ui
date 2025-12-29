@@ -1,6 +1,6 @@
 import { type Component, createEffect, createMemo, createSignal, onCleanup, onMount, Show } from 'solid-js';
-import type { LabelMode } from '../../types';
 import '../../styles/Slider.css';
+import type { LabelMode } from '../../types';
 
 interface SliderProps {
   min: number;

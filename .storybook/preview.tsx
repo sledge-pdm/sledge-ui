@@ -1,9 +1,9 @@
 /** @jsxImportSource solid-js */
-import { applyTheme } from '@sledge/theme';
-import '@sledge/theme/global.css';
 import addonA11y from '@storybook/addon-a11y';
 import addonDocs from '@storybook/addon-docs';
 import { createJSXDecorator, definePreview } from 'storybook-solidjs-vite';
+import '../src/theme/global.css';
+import { applyTheme } from '../src/theme/Theme';
 
 export const solidDecorator = createJSXDecorator((Story, context) => {
   applyTheme(context.globals.theme);

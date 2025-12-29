@@ -1,5 +1,4 @@
-
-import { clsx } from '@sledge/core';
+import { clsx } from '@sledge-pdm/core';
 import { type Component, type JSX, splitProps } from 'solid-js';
 import '../styles/Icon.css';
 

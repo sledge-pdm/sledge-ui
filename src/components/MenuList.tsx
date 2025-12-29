@@ -1,8 +1,8 @@
-import { clsx } from '@sledge/core';
+import { clsx } from '@sledge-pdm/core';
 import { type Component, For, type JSX, onCleanup, onMount, Show } from 'solid-js';
-import Icon from './Icon';
 import '../styles/MenuList.css';
-import { color } from 'src/theme/vars';
+import { color } from '../theme/vars';
+import Icon from './Icon';
 
 const menuDirection = {
   down: 'menu-dir-down',

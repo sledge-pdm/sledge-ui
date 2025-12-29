@@ -1,6 +1,6 @@
 import { Show, type Component } from 'solid-js';
-import type { LabelMode } from '../../types';
 import '../../styles/ToggleSwitch.css';
+import type { LabelMode } from '../../types';
 
 interface Props {
   id?: string;
@@ -20,7 +20,14 @@ const ToggleSwitch: Component<Props> = (p) => {
     /* label 全体でクリック可能に */
     <label class='toggle-wrapper' title={p.title}>
       <Show when={p.labelMode === 'left'}>{p.children}</Show>
-      <input id={p.id} type='checkbox' name={p.name} checked={p.checked} onInput={(e) => p.onChange?.(e.currentTarget.checked)} class='toggle-input' />
+      <input
+        id={p.id}
+        type='checkbox'
+        name={p.name}
+        checked={p.checked}
+        onInput={(e) => p.onChange?.(e.currentTarget.checked)}
+        class='toggle-input'
+      />
       <span class='toggle-track'>
         <span class='toggle-thumb' />
       </span>

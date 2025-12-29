@@ -1,6 +1,6 @@
 import { type Component, Show } from 'solid-js';
-import type { LabelMode } from '../../types';
 import '../../styles/Checkbox.css';
+import type { LabelMode } from '../../types';
 
 const Checkbox: Component<{
   id?: string;

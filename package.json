@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@chromatic-com/storybook": "^4.1.3",
-    "@sledge/anvil": "npm:@sledge-pdm/anvil@^1.0.7",
+    "@sledge-pdm/anvil": "^1.1.1",
+    "@sledge-pdm/core": "^1.0.3",
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
@@ -39,7 +40,9 @@
   },
   "scripts": {
     "build": "storybook build",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "prettier": "prettier --write . --config .prettierrc",
+    "format": "pnpm prettier"
   },
   "publishConfig": {
     "access": "public",

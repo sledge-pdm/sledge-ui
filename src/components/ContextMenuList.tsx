@@ -1,8 +1,8 @@
-import type { Vec2 } from '@sledge/core';
+import type { Vec2 } from '@sledge-pdm/core';
 import { createEffect, createSignal, onMount, type Component } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import { MenuList, type MenuListAppearance, type MenuListOption } from './MenuList';
 import '../styles/ContextMenuList.css';
+import { MenuList, type MenuListAppearance, type MenuListOption } from './MenuList';
 
 interface Props {
   appearance?: MenuListAppearance;
